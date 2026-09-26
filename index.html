@@ -24,12 +24,12 @@
     <a href="#inicio" class="brand"><img src="logo-huellitas-sos.jpeg" alt="Logo Huellitas SOS"></a>
     <button class="menu-toggle" aria-label="Abrir menú">☰</button>
     <nav class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#petshop">Petshop & Spa</a>
-      <a href="#contacto">Contacto</a>
-      <a class="nav-cta" href="#reservar">Reservar cita</a>
+      <a href="#inicio" data-section="inicio">Inicio</a>
+      <a href="#servicios" data-section="servicios">Servicios</a>
+      <a href="#nosotros" data-section="nosotros">Nosotros</a>
+      <a href="#petshop" data-section="petshop">Petshop & Spa</a>
+      <a href="#contacto" data-section="contacto">Contacto</a>
+      <a class="nav-cta" href="#reservar" data-section="reservar">Reservar cita</a>
     </nav>
   </div>
 </header>
@@ -43,8 +43,8 @@
       <h1>Donde cada <em>huellita</em> recibe cuidado y amor.</h1>
       <p>Clínica veterinaria integral en Bogotá para cuidar la salud, bienestar y felicidad de perros y gatos en cada etapa de su vida.</p>
       <div class="hero-buttons">
-        <a class="btn primary" href="#reservar">Reservar una cita <span>→</span></a>
-        <a class="btn ghost" href="#servicios">Conocer servicios</a>
+        <a class="btn primary" href="#reservar" data-section="reservar">Reservar una cita <span>→</span></a>
+        <a class="btn ghost" href="#servicios" data-section="servicios">Conocer servicios</a>
       </div>
       <div class="hero-points">
         <span>✓ Atención 24/7</span><span>✓ Diagnóstico integral</span><span>✓ Petshop & Spa</span>
@@ -101,7 +101,7 @@
       <p>En Huellitas SOS creemos que una mascota es parte de la familia. Por eso creamos un espacio moderno, cercano y pensado para acompañarte en cada momento: desde la prevención y los controles de rutina hasta una urgencia.</p>
       <p>Integramos servicios médicos, diagnóstico, bienestar, spa y petshop para que encuentres en un solo lugar el cuidado que tu compañero necesita.</p>
       <div class="checks"><div>✓ Atención cálida y responsable</div><div>✓ Servicios integrales en un mismo lugar</div><div>✓ Disponibilidad las 24 horas</div></div>
-      <a class="text-link" href="#reservar">Agenda la cita de tu mascota →</a>
+      <a class="text-link" href="#reservar" data-section="reservar">Agenda la cita de tu mascota →</a>
     </div>
   </div>
 </section>
@@ -171,7 +171,7 @@
   <div class="wrap footer-main">
     <img src="logo-huellitas-sos.jpeg" alt="Huellitas SOS">
     <div><h3>Huellitas SOS</h3><p>Salud, bienestar y amor para quienes hacen parte de tu familia.</p></div>
-    <div class="footer-links"><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#nosotros">Nosotros</a><a href="#reservar">Reservar</a></div>
+    <div class="footer-links"><a href="#inicio" data-section="inicio">Inicio</a><a href="#servicios" data-section="servicios">Servicios</a><a href="#nosotros" data-section="nosotros">Nosotros</a><a href="#reservar" data-section="reservar">Reservar</a></div>
   </div>
   <div class="copyright">© 2026 Huellitas SOS · Clínica Veterinaria 24/7 · Bogotá</div>
 </footer>
@@ -180,8 +180,52 @@
 const menu = document.querySelector('.menu-toggle');
 const links = document.querySelector('.nav-links');
 menu.addEventListener('click',()=>links.classList.toggle('open'));
+
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
 
+/* === ABRIR CADA SECCIÓN EN UNA VENTANA INDEPENDIENTE === */
+document.querySelectorAll('[data-section]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const id = this.dataset.section;
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    // Clonamos la sección para no alterar la página original
+    const content = section.cloneNode(true);
+    content.removeAttribute('id');
+
+    // Cabecera y estilos para la ventana emergente
+    const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huellitas SOS | ${id.charAt(0).toUpperCase() + id.slice(1)}</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background:#fbfdfc; }
+  .ventana-wrap { width:min(1180px,92%); margin:0 auto; }
+  .volver { display:inline-flex; align-items:center; gap:8px; margin:22px 0 0; font-weight:800; color:var(--orange); }
+</style>
+</head>
+<body>
+  <div class="ventana-wrap">
+    <a class="volver" href="index.html" target="_self">← Volver a Huellitas SOS</a>
+  </div>
+  ${content.outerHTML}
+</body>
+</html>`;
+
+    const win = window.open('', '_blank');
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+  });
+});
+
+/* === FORMULARIO WHATSAPP === */
 document.getElementById('appointmentForm').addEventListener('submit', function(e){
   e.preventDefault();
   const f = new FormData(this);
