@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
 
 :root {
-    --teal: #0F4C4A;
-    --teal-dark: #0A3533;
-    --teal-soft: #E0F2F1;
-    --coral: #FF8A65;
-    --coral-dark: #E66A4A;
-    --cream: #FDFBF7;
-    --ink: #1A2E2C;
-    --muted: #6B7F7D;
-    --line: #E5EDEB;
+    /* Paleta amigable de veterinaria */
+    --primary: #2A9D8F;       /* Verde suave principal */
+    --primary-dark: #1E7A6F;  /* Verde más oscuro para hover */
+    --primary-light: #E0F2F1; /* Verde muy claro para fondos */
+    --secondary: #A8DADC;     /* Azul claro */
+    --accent: #E9C46A;        /* Toque cálido (amarillo suave) */
+    --neutral-bg: #F8F9FA;    /* Fondo neutro claro */
     --white: #FFFFFF;
-    --shadow: 0 20px 40px rgba(15, 76, 74, 0.08);
-    --shadow-hover: 0 25px 50px rgba(15, 76, 74, 0.15);
+    --ink: #2D3A3A;           /* Texto principal oscuro pero suave */
+    --muted: #6C7A7A;         /* Texto secundario */
+    --line: #E9ECEF;          /* Bordes suaves */
+    --shadow: 0 4px 20px rgba(42, 157, 143, 0.06);
+    --shadow-hover: 0 12px 30px rgba(42, 157, 143, 0.12);
 }
 
 * {
@@ -26,9 +27,9 @@ html {
 
 body {
     margin: 0;
-    background: var(--cream);
+    background: var(--neutral-bg);
     color: var(--ink);
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
     line-height: 1.65;
     overflow-x: hidden;
 }
@@ -45,26 +46,28 @@ a {
 
 /* Top Bar */
 .topbar {
-    background: var(--teal-dark);
-    color: #fff;
-    font-size: 12px;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
 }
 
 .topbar-in {
-    min-height: 38px;
+    min-height: 44px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
 }
 
-.topbar-in span {
-    opacity: .9;
+.topbar a {
+    font-weight: 600;
+    color: var(--primary);
+    transition: color 0.2s;
 }
 
-.topbar a {
-    font-weight: 700;
-    color: var(--coral);
+.topbar a:hover {
+    color: var(--primary-dark);
 }
 
 /* Header */
@@ -72,21 +75,21 @@ a {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(253, 251, 247, 0.95);
-    backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
-    box-shadow: 0 4px 20px rgba(15, 76, 74, 0.03);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .nav {
-    height: 88px;
+    height: 84px;
     display: flex;
     align-items: center;
 }
 
 .brand {
-    width: 122px;
-    height: 78px;
+    width: 110px;
+    height: 70px;
     display: block;
 }
 
@@ -101,15 +104,20 @@ a {
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 28px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--teal);
+    gap: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
 }
 
 .nav-links a:not(.nav-cta) {
     position: relative;
     padding: 8px 0;
+    transition: color 0.2s;
+}
+
+.nav-links a:not(.nav-cta):hover {
+    color: var(--primary);
 }
 
 .nav-links a:not(.nav-cta):after {
@@ -117,10 +125,11 @@ a {
     position: absolute;
     left: 0;
     right: 100%;
-    bottom: 2px;
+    bottom: 0;
     height: 2px;
-    background: var(--coral);
-    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--primary);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
 }
 
 .nav-links a:not(.nav-cta):hover:after {
@@ -128,133 +137,103 @@ a {
 }
 
 .nav-cta {
-    background: var(--coral);
+    background: var(--primary);
     color: #fff !important;
-    padding: 12px 22px;
-    border-radius: 999px;
-    box-shadow: 0 8px 20px rgba(255, 138, 101, 0.3);
-    transition: .3s;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(42, 157, 143, 0.3);
+    transition: all 0.3s ease;
 }
 
 .nav-cta:hover {
-    background: var(--coral-dark);
+    background: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(255, 138, 101, 0.4);
+    box-shadow: 0 6px 20px rgba(42, 157, 143, 0.4);
 }
 
 .menu-toggle {
     display: none;
     background: none;
     border: 0;
-    font-size: 27px;
-    color: var(--teal);
+    font-size: 26px;
+    color: var(--primary);
     cursor: pointer;
 }
 
 /* Hero Section */
 .hero {
     position: relative;
-    min-height: 720px;
+    padding: 100px 0;
+    background: linear-gradient(135deg, #F0FAF8 0%, #FFFFFF 100%);
     overflow: hidden;
-    background: var(--teal-dark);
-    display: flex;
-    align-items: center;
-}
-
-.hero-bg-shape {
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(255,138,101,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
 }
 
 .hero-grid {
-    position: relative;
-    z-index: 2;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 60px;
-    padding: 80px 0;
 }
 
 .hero-copy {
-    color: #fff;
-    max-width: 600px;
+    max-width: 560px;
 }
 
 .pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--primary-dark);
+    background: var(--primary-light);
     padding: 8px 16px;
     border-radius: 99px;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     margin-bottom: 24px;
-    backdrop-filter: blur(8px);
 }
 
 .pill-dot {
     width: 8px;
     height: 8px;
-    background: var(--coral);
+    background: var(--primary);
     border-radius: 50%;
     display: inline-block;
     animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 138, 101, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 138, 101, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 138, 101, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(42, 157, 143, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(42, 157, 143, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(42, 157, 143, 0); }
 }
 
 .hero h1 {
-    font-family: "Fraunces", serif;
-    font-size: clamp(45px, 5.5vw, 72px);
-    line-height: 1.05;
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.1;
     margin: 0 0 24px;
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
     font-weight: 700;
+    color: var(--ink);
 }
 
 .hero h1 em {
     font-style: normal;
-    color: var(--coral);
-    position: relative;
-}
-
-.hero h1 em::after {
-    content: '';
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 138, 101, 0.3);
-    border-radius: 4px;
-    z-index: -1;
+    color: var(--primary);
 }
 
 .hero p {
-    font-size: 18px;
-    max-width: 520px;
-    color: #D1E8E6;
-    margin: 0 0 32px;
+    font-size: 17px;
+    max-width: 480px;
+    color: var(--muted);
+    margin: 0 0 36px;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 14px;
-    margin-bottom: 28px;
+    gap: 16px;
+    margin-bottom: 32px;
     flex-wrap: wrap;
 }
 
@@ -262,44 +241,116 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     border: 0;
     cursor: pointer;
     font: inherit;
-    font-weight: 700;
-    border-radius: 999px;
-    padding: 15px 28px;
-    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 14px 28px;
+    transition: all 0.3s ease;
+    font-size: 15px;
 }
 
 .btn.primary {
-    background: var(--coral);
+    background: var(--primary);
     color: #fff;
-    box-shadow: 0 10px 25px rgba(255, 138, 101, 0.3);
+    box-shadow: 0 4px 14px rgba(42, 157, 143, 0.3);
 }
 
 .btn.primary:hover {
-    background: var(--coral-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(255, 138, 101, 0.4);
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(42, 157, 143, 0.4);
 }
 
 .btn.ghost {
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
+    border: 1.5px solid var(--line);
+    color: var(--ink);
+    background: transparent;
 }
 
 .btn.ghost:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-3px);
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-2px);
 }
 
 .hero-points {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-visual .hero-img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(42, 157, 143, 0.1);
+    object-fit: cover;
+    aspect-ratio: 4/5;
+}
+
+.hero-card {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--white);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    max-width: 260px;
+    border: 1px solid var(--line);
+    z-index: 2;
+}
+
+.emergency-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.hero-card strong {
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    display: block;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.hero-card p {
     font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 16px;
+}
+
+.hero-card a {
+    color: var(--primary);
     font-weight: 600;
-    color: #
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.hero-card a:hover {
+    color: var(--primary-dark);
+}
+
+/* Stats */
+.stats {
+    background: var
