@@ -21,15 +21,15 @@
 
 <header class="header" id="header">
   <div class="wrap nav">
-    <a href="#inicio" class="brand"><img src="logo-huellitas-sos.jpeg" alt="Logo Huellitas SOS"></a>
+    <a href="#inicio" class="brand" data-view="inicio"><img src="logo-huellitas-sos.jpeg" alt="Logo Huellitas SOS"></a>
     <button class="menu-toggle" aria-label="Abrir menú">☰</button>
     <nav class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#petshop">Petshop & Spa</a>
-      <a href="#contacto">Contacto</a>
-      <a class="nav-cta" href="#reservar">Reservar cita</a>
+      <a href="#inicio" data-view="inicio">Inicio</a>
+      <a href="#servicios" data-view="servicios">Servicios</a>
+      <a href="#nosotros" data-view="nosotros">Nosotros</a>
+      <a href="#petshop" data-view="petshop">Petshop & Spa</a>
+      <a href="#contacto" data-view="contacto">Contacto</a>
+      <a class="nav-cta" href="#reservar" data-view="reservar">Reservar cita</a>
     </nav>
   </div>
 </header>
@@ -46,8 +46,8 @@
         <h1>Donde cada <em>huellita</em> recibe cuidado y amor.</h1>
         <p>Clínica veterinaria integral en Bogotá para cuidar la salud, bienestar y felicidad de perros y gatos en cada etapa de su vida.</p>
         <div class="hero-buttons">
-          <a class="btn primary" href="#reservar">Reservar una cita <span>→</span></a>
-          <a class="btn ghost" href="#servicios">Conocer servicios</a>
+          <a class="btn primary" href="#reservar" data-view="reservar">Reservar una cita <span>→</span></a>
+          <a class="btn ghost" href="#servicios" data-view="servicios">Conocer servicios</a>
         </div>
         <div class="hero-points">
           <span>✓ Atención 24/7</span><span>✓ Diagnóstico integral</span><span>✓ Petshop & Spa</span>
@@ -110,7 +110,7 @@
         <p>En Huellitas SOS creemos que una mascota es parte de la familia. Por eso creamos un espacio moderno, cercano y pensado para acompañarte en cada momento: desde la prevención y los controles de rutina hasta una urgencia.</p>
         <p>Integramos servicios médicos, diagnóstico, bienestar, spa y petshop para que encuentres en un solo lugar el cuidado que tu compañero necesita.</p>
         <div class="checks"><div>✓ Atención cálida y responsable</div><div>✓ Servicios integrales en un mismo lugar</div><div>✓ Disponibilidad las 24 horas</div></div>
-        <a class="text-link" href="#reservar">Agenda la cita de tu mascota →</a>
+        <a class="text-link" href="#reservar" data-view="reservar">Agenda la cita de tu mascota →</a>
       </div>
     </div>
   </div>
@@ -191,64 +191,90 @@
   <div class="wrap footer-main">
     <img src="logo-huellitas-sos.jpeg" alt="Huellitas SOS">
     <div><h3>Huellitas SOS</h3><p>Salud, bienestar y amor para quienes hacen parte de tu familia.</p></div>
-    <div class="footer-links"><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#nosotros">Nosotros</a><a href="#reservar">Reservar</a></div>
+    <div class="footer-links">
+      <a href="#inicio" data-view="inicio">Inicio</a>
+      <a href="#servicios" data-view="servicios">Servicios</a>
+      <a href="#nosotros" data-view="nosotros">Nosotros</a>
+      <a href="#reservar" data-view="reservar">Reservar</a>
+    </div>
   </div>
   <div class="copyright">© 2026 Huellitas SOS · Clínica Veterinaria 24/7 · Bogotá</div>
 </footer>
 
 <script>
-/* ===== MENÚ MÓVIL ===== */
-const menu = document.querySelector('.menu-toggle');
-const links = document.querySelector('.nav-links');
-menu.addEventListener('click', () => links.classList.toggle('open'));
+(function(){
+  "use strict";
 
-/* ===== NAVEGACIÓN ENTRE VISTAS (SPA) ===== */
-const views = document.querySelectorAll('.view');
+  // 1) MENÚ MÓVIL
+  var menu = document.querySelector('.menu-toggle');
+  var links = document.querySelector('.nav-links');
+  if (menu && links) {
+    menu.addEventListener('click', function(){
+      links.classList.toggle('open');
+    });
+  }
 
-function showView(id) {
-  const target = document.getElementById(id);
-  if (!target) return;
+  // 2) NAVEGACIÓN ENTRE VISTAS
+  var views = document.querySelectorAll('.view');
 
-  views.forEach(v => v.classList.remove('active'));
-  target.classList.add('active');
+  function showView(id){
+    var found = false;
+    views.forEach(function(v){
+      if (v.id === id){
+        v.classList.add('active');
+        found = true;
+      } else {
+        v.classList.remove('active');
+      }
+    });
+    if (!found) return false;
 
-  links.classList.remove('open');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+    if (links) links.classList.remove('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return true;
+  }
 
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute('href');
-    if (href === '#') return;
-    const id = href.replace('#', '');
-    const target = document.getElementById(id);
+  // Escuchamos TODOS los clicks en el documento y decidimos
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('a[data-view], a[href^="#"]');
+    if (!el) return;
 
-    if (target && target.classList.contains('view')) {
+    var id = el.getAttribute('data-view');
+    if (!id){
+      var href = el.getAttribute('href') || '';
+      if (href.indexOf('#') === 0) id = href.substring(1);
+    }
+    if (!id) return;
+
+    // Si el id corresponde a una vista existente → lo mostramos
+    var target = document.getElementById(id);
+    if (target && target.classList.contains('view')){
       e.preventDefault();
       showView(id);
     }
   });
-});
 
-/* ===== FORMULARIO WHATSAPP ===== */
-document.getElementById('appointmentForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const f = new FormData(this);
-  const msg =
-`🐾 SOLICITUD DE CITA - HUELLITAS SOS
-
-Nombre: ${f.get('nombre')}
-Teléfono: ${f.get('telefono')}
-Mascota: ${f.get('mascota')}
-Especie: ${f.get('especie')}
-Fecha: ${f.get('fecha')}
-Hora: ${f.get('hora')}
-Servicio: ${f.get('servicio')}
-Mensaje: ${f.get('mensaje') || 'Sin mensaje adicional'}
-
-Por favor confirmar disponibilidad.`;
-  window.open('https://wa.me/573213673394?text=' + encodeURIComponent(msg), '_blank');
-});
+  // 3) FORMULARIO WHATSAPP
+  var form = document.getElementById('appointmentForm');
+  if (form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var f = new FormData(form);
+      var msg =
+        "🐾 SOLICITUD DE CITA - HUELLITAS SOS\n\n" +
+        "Nombre: " + (f.get('nombre') || '') + "\n" +
+        "Teléfono: " + (f.get('telefono') || '') + "\n" +
+        "Mascota: " + (f.get('mascota') || '') + "\n" +
+        "Especie: " + (f.get('especie') || '') + "\n" +
+        "Fecha: " + (f.get('fecha') || '') + "\n" +
+        "Hora: " + (f.get('hora') || '') + "\n" +
+        "Servicio: " + (f.get('servicio') || '') + "\n" +
+        "Mensaje: " + (f.get('mensaje') || 'Sin mensaje adicional') + "\n\n" +
+        "Por favor confirmar disponibilidad.";
+      window.open('https://wa.me/573213673394?text=' + encodeURIComponent(msg), '_blank');
+    });
+  }
+})();
 </script>
 </body>
 </html>
