@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wilin34.github.io/huellitas/sitemap.xml
