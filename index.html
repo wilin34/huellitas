@@ -13,6 +13,7 @@
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="wrap topbar-in">
     <span>🐾 Atención veterinaria 24 horas · 7 días a la semana</span>
@@ -20,12 +21,15 @@
   </div>
 </div>
 
+<!-- HEADER -->
 <header class="header" id="header">
   <div class="wrap nav">
-    <a href="#inicio" class="brand" data-view="inicio"><img src="logo-huellitas-sos.jpeg" alt="Logo Huellitas SOS"></a>
+    <a href="#inicio" class="brand" data-view="inicio">
+      <img src="logo-huellitas-sos.jpeg" alt="Logo Huellitas SOS">
+    </a>
     <button class="menu-toggle" aria-label="Abrir menú">☰</button>
-    <nav class="nav-links">
-      <a href="#inicio" data-view="inicio">Inicio</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#inicio" data-view="inicio" class="active">Inicio</a>
       <a href="#nosotros" data-view="nosotros">Nosotros</a>
       <a href="#servicios" data-view="servicios">Servicios</a>
       <a href="#petshop" data-view="petshop">Pet Shop</a>
@@ -46,7 +50,7 @@
     <div class="hero-bg"></div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <div class="pill">● Estamos disponibles 24/7</div>
+        <div class="pill"><span class="pill-dot"></span> Estamos disponibles 24/7</div>
         <h1>Donde cada <em>huellita</em> recibe cuidado y amor.</h1>
         <p>Clínica veterinaria integral en Bogotá para cuidar la salud, bienestar y felicidad de perros y gatos en cada etapa de su vida.</p>
         <div class="hero-buttons">
@@ -57,11 +61,14 @@
           <span>✓ Atención 24/7</span><span>✓ Diagnóstico integral</span><span>✓ Petshop & Spa</span>
         </div>
       </div>
-      <div class="hero-card">
-        <div class="emergency">EMERGENCIAS</div>
-        <strong>¿Tu mascota necesita atención?</strong>
-        <p>Estamos disponibles día y noche para acompañarte cuando más nos necesitas.</p>
-        <a href="tel:+573213673394">Llamar ahora <span>→</span></a>
+      <div class="hero-visual">
+        <img class="hero-img" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85" alt="Perro feliz en la veterinaria">
+        <div class="hero-card">
+          <div class="emergency-badge">EMERGENCIAS</div>
+          <strong>¿Tu mascota necesita atención?</strong>
+          <p>Estamos disponibles día y noche para acompañarte cuando más nos necesitas.</p>
+          <a href="tel:+573213673394">Llamar ahora →</a>
+        </div>
       </div>
     </div>
   </div>
@@ -75,7 +82,6 @@
     </div>
   </section>
 
-  <!-- Bloque de bienvenida ampliado -->
   <section class="section welcome">
     <div class="wrap">
       <div class="section-head">
@@ -108,7 +114,6 @@
     </div>
   </section>
 
-  <!-- CTA final -->
   <section class="cta-band">
     <div class="wrap cta-band-in">
       <div>
@@ -148,7 +153,6 @@
     </div>
   </section>
 
-  <!-- Misión, Visión, Valores -->
   <section class="section section-alt">
     <div class="wrap">
       <div class="mvv-grid">
@@ -177,7 +181,6 @@
     </div>
   </section>
 
-  <!-- Razones para elegirnos -->
   <section class="section">
     <div class="wrap">
       <div class="section-head">
@@ -222,91 +225,78 @@
   <section class="section">
     <div class="wrap">
       <div class="services-grid-detailed">
-
         <article class="srv-card">
           <div class="srv-icon">🩺</div>
           <h3>Consulta médica general</h3>
           <p>Valoración clínica completa para evaluar el estado general de tu mascota. Incluye revisión de signos vitales, examen físico, historia clínica y plan de tratamiento personalizado.</p>
           <ul class="srv-list"><li>Consulta preventiva o por enfermedad</li><li>Control de crecimiento para cachorros</li><li>Seguimiento de tratamientos</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">💉</div>
           <h3>Vacunación</h3>
           <p>Esquemas completos de vacunación para perros y gatos según su edad, estilo de vida y factores de riesgo. Te ayudamos a mantener al día su carné.</p>
           <ul class="srv-list"><li>Vacunas múltiples (parvovirus, distemper, etc.)</li><li>Antirrábica</li><li>Triple felina y leucemia felina</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🧪</div>
           <h3>Laboratorio clínico</h3>
           <p>Análisis de sangre, orina, heces y pruebas especiales para apoyar diagnósticos precisos. Resultados oportunos para iniciar el tratamiento correcto.</p>
           <ul class="srv-list"><li>Hemograma y química sanguínea</li><li>Pruebas de coagulación</li><li>Coprológicos y urocultivos</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🩻</div>
           <h3>Radiografía (Rayos X)</h3>
           <p>Imágenes diagnósticas para evaluar huesos, articulaciones, tórax y abdomen. Esencial para detectar fracturas, cuerpos extraños o problemas internos.</p>
           <ul class="srv-list"><li>Estudios de tórax y abdomen</li><li>Evaluación ortopédica</li><li>Contraste (cuando se requiere)</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🔎</div>
           <h3>Ecografía</h3>
           <p>Estudio no invasivo que permite observar órganos internos en tiempo real. Fundamental en el seguimiento de gestaciones, detección de masas o problemas abdominales.</p>
           <ul class="srv-list"><li>Ecografía abdominal</li><li>Seguimiento de gestación</li><li>Ecocardiografía (según disponibilidad)</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🚑</div>
           <h3>Urgencias 24/7</h3>
           <p>Estamos disponibles todos los días y a toda hora para atender emergencias. Contamos con personal médico preparado para actuar con rapidez.</p>
           <ul class="srv-list"><li>Intoxicaciones y accidentes</li><li>Dificultad respiratoria</li><li>Golpes de calor y convulsiones</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🐾</div>
           <h3>Cirugía veterinaria</h3>
           <p>Procedimientos quirúrgicos programados y de urgencia con protocolos anestésicos seguros y monitoreo constante del paciente.</p>
           <ul class="srv-list"><li>Esterilización (machos y hembras)</li><li>Cirugías de tejidos blandos</li><li>Extracción de cuerpos extraños</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🦷</div>
           <h3>Odontología</h3>
           <p>Diagnóstico y tratamiento de problemas dentales. La salud oral impacta directamente en el bienestar general de tu mascota.</p>
           <ul class="srv-list"><li>Limpieza dental con ultrasonido</li><li>Extracción de piezas dañadas</li><li>Tratamiento de gingivitis y sarro</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🏥</div>
           <h3>Hospitalización</h3>
           <p>Área de hospitalización con monitoreo para pacientes que requieren observación, fluidoterapia o cuidados postquirúrgicos.</p>
           <ul class="srv-list"><li>Cuidado de pacientes críticos</li><li>Fluidoterapia y medicación IV</li><li>Reportes diarios a la familia</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🥗</div>
           <h3>Nutrición y dietas</h3>
           <p>Asesoría nutricional personalizada según la edad, raza, peso y condición médica de tu mascota. Prevenimos y tratamos enfermedades con alimentación adecuada.</p>
           <ul class="srv-list"><li>Planes para cachorros y adultos</li><li>Dietas para sobrepeso o diabetes</li><li>Alimentos medicados</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🔬</div>
           <h3>Exámenes especializados</h3>
           <p>Pruebas complementarias para diagnósticos específicos: citologías, biopsias y pruebas hormonales o infecciosas.</p>
           <ul class="srv-list"><li>Citología y biopsia</li><li>Pruebas de leishmania y hemoparásitos</li><li>Perfil tiroideo y hormonal</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🐶</div>
           <h3>Medicina preventiva</h3>
           <p>Planes de salud preventiva que incluyen desparasitación, control de pulgas y garrapatas, y chequeos periódicos para detectar problemas a tiempo.</p>
           <ul class="srv-list"><li>Desparasitación interna y externa</li><li>Control de ectoparásitos</li><li>Chequeos anuales</li></ul>
         </article>
-
       </div>
     </div>
   </section>
@@ -342,63 +332,54 @@
         <h2>Explora nuestras categorías.</h2>
       </div>
       <div class="shop-grid">
-
         <article class="shop-card">
           <div class="shop-icon">🍖</div>
           <h3>Alimentos</h3>
           <p>Concentrados secos y húmedos para cachorros, adultos y senior. Marcas premium y alimentos medicados para necesidades específicas.</p>
           <ul class="shop-list"><li>Concentrados premium</li><li>Alimento húmedo y snacks</li><li>Dietas veterinarias</li></ul>
         </article>
-
         <article class="shop-card">
           <div class="shop-icon">🦴</div>
           <h3>Snacks y premios</h3>
           <p>Premios ideales para entrenamiento o para consentir a tu mascota. Opciones naturales, sin colorantes y con sabores que aman.</p>
           <ul class="shop-list"><li>Huesos y snacks dentales</li><li>Premios de entrenamiento</li><li>Galletas naturales</li></ul>
         </article>
-
         <article class="shop-card">
           <div class="shop-icon">🎾</div>
           <h3>Juguetes</h3>
           <p>Juguetes interactivos, mordedores, pelotas y juguetes de inteligencia para estimular el cuerpo y la mente de tu mascota.</p>
           <ul class="shop-list"><li>Juguetes de cuerda y goma</li><li>Pelotas y lanzadores</li><li>Juguetes de olfato e inteligencia</li></ul>
         </article>
-
         <article class="shop-card">
           <div class="shop-icon">🛏️</div>
           <h3>Descanso y camas</h3>
           <p>Camas, cojines y casitas para que tu mascota descanse cómoda y segura, con materiales fáciles de lavar.</p>
           <ul class="shop-list"><li>Camas y cojines</li><li>Cobijas y mantas</li><li>Casitas y transportadoras</li></ul>
         </article>
-
         <article class="shop-card">
           <div class="shop-icon">🦮</div>
           <h3>Accesorios de paseo</h3>
           <p>Collares, pecheras, correas y arneses de calidad para paseos cómodos y seguros, adaptados a cada tamaño.</p>
           <ul class="shop-list"><li>Pecheras y arneses</li><li>Collares antigarras</li><li>Correas y pretales</li></ul>
         </article>
-
         <article class="shop-card">
           <div class="shop-icon">🧴</div>
           <h3>Higiene y cuidado</h3>
           <p>Shampoos, acondicionadores, cepillos y productos de higiene para mantener a tu mascota limpia, sana y con un pelaje brillante.</p>
           <ul class="shop-list"><li>Shampoos hipoalergénicos</li><li>Cepillos y cardinas</li><li>Toallitas y desodorantes</li></ul>
         </article>
-
         <article class="shop-card">
           <div class="shop-icon">💊</div>
           <h3>Salud y medicamentos</h3>
           <p>Desparasitantes, antipulgas, suplementos vitamínicos y medicamentos formulados por nuestros veterinarios.</p>
           <ul class="shop-list"><li>Antipulgas y garrapatas</li><li>Desparasitantes</li><li>Vitaminas y suplementos</li></ul>
         </article>
-
         <article class="shop-card">
           <div class="shop-icon">🐱</div>
           <h3>Línea para gatos</h3>
           <p>Todo lo que un gato necesita: areneros, arena aglutinante, rascadores, fuentes de agua y juguetes felinos.</p>
           <ul class="shop-list"><li>Areneros y arenas</li><li>Rascadores y torres</li><li>Fuentes y bebederos</li></ul>
         </article>
-
       </div>
     </div>
   </section>
@@ -430,63 +411,54 @@
   <section class="section">
     <div class="wrap">
       <div class="services-grid-detailed">
-
         <article class="srv-card">
           <div class="srv-icon">🛁</div>
           <h3>Baño básico</h3>
           <p>Baño con productos hipoalergénicos según el tipo de pelaje, secado profesional y cepillado final. Ideal para mantener una higiene regular.</p>
           <ul class="srv-list"><li>Shampoo según tipo de piel</li><li>Secado y cepillado</li><li>Perfume suave al finalizar</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">✂️</div>
           <h3>Corte y peluquería</h3>
           <p>Corte higiénico o estético adaptado a la raza y al estilo que prefieras. Nuestros peluqueros cuidan cada detalle para un acabado profesional.</p>
           <ul class="srv-list"><li>Corte de raza o personalizado</li><li>Corte higiénico</li><li>Arreglo de patas y cara</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🪮</div>
           <h3>Cepillado y desenredo</h3>
           <p>Tratamiento para pelajes enredados o nudos, con productos que ayudan a desenredar sin maltratar el pelo ni la piel.</p>
           <ul class="srv-list"><li>Desenredo suave</li><li>Cepillado profundo</li><li>Hidratación del pelaje</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🦷</div>
           <h3>Higiene dental</h3>
           <p>Limpieza dental básica y cepillado para prevenir sarro, mal aliento y problemas mayores. Complemento ideal de la odontología veterinaria.</p>
           <ul class="srv-list"><li>Cepillado dental</li><li>Spray o gel dental</li><li>Recomendaciones de cuidado en casa</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">💅</div>
           <h3>Corte de uñas</h3>
           <p>Corte seguro de uñas con herramientas adecuadas para evitar lesiones, seguido de limado para un acabado suave.</p>
           <ul class="srv-list"><li>Corte seguro</li><li>Limado final</li><li>Revisión de almohadillas</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🌸</div>
           <h3>Spa relajante</h3>
           <p>Sesión de spa con masajes, aromaterapia suave y tratamientos especiales para consentir a tu mascota y reducir su estrés.</p>
           <ul class="srv-list"><li>Masaje relajante</li><li>Aromaterapia pet-safe</li><li>Tratamiento hidratante</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🧴</div>
           <h3>Tratamientos dermatológicos</h3>
           <p>Baños medicados y tratamientos específicos para pieles sensibles, con alergias o afecciones dermatológicas diagnosticadas.</p>
           <ul class="srv-list"><li>Baños medicados</li><li>Tratamiento antimicótico</li><li>Hidratación intensiva</li></ul>
         </article>
-
         <article class="srv-card">
           <div class="srv-icon">🎀</div>
           <h3>Paquete completo</h3>
           <p>Nuestro servicio estrella: baño, corte, cepillado, uñas, higiene dental y perfume. Todo lo que tu mascota necesita en una sola sesión.</p>
           <ul class="srv-list"><li>Baño + corte + cepillado</li><li>Uñas + oídos + dientes</li><li>Perfume y lazo decorativo</li></ul>
         </article>
-
       </div>
     </div>
   </section>
@@ -550,4 +522,110 @@
           <option value="">Selecciona un servicio</option>
           <option>Consulta médica</option>
           <option>Vacunación</option>
-          <option>
+          <option>Urgencia 24/7</option>
+          <option>Laboratorio</option>
+          <option>Radiografía / Ecografía</option>
+          <option>Cirugía</option>
+          <option>Odontología</option>
+          <option>Hospitalización</option>
+          <option>Spa / Estética</option>
+          <option>Pet Shop</option>
+        </select></label>
+        <label>Mensaje adicional<textarea name="mensaje" rows="3" placeholder="Cuéntanos brevemente qué necesita tu mascota..."></textarea></label>
+        <button type="submit" class="btn primary full">Enviar por WhatsApp →</button>
+      </form>
+    </div>
+  </section>
+</section>
+
+
+<!-- ============================================================
+     VISTA CONTACTO
+============================================================ -->
+<section class="view" id="contacto">
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">CONTACTO</span>
+      <h1>Estamos aquí para ti y tu mascota.</h1>
+      <p>Llámanos, escríbenos o visítanos. Atendemos 24 horas al día, 7 días a la semana.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <h2>Información de contacto</h2>
+        <div class="contact-item"><span>📞</span><div><b>Teléfono / WhatsApp</b><a href="tel:+573213673394">321 367 3394</a></div></div>
+        <div class="contact-item"><span>📍</span><div><b>Ubicación</b><p>Bogotá, Colombia</p></div></div>
+        <div class="contact-item"><span>🕐</span><div><b>Horario</b><p>Lunes a domingo · 24 horas</p></div></div>
+        <div class="contact-item"><span>📧</span><div><b>Correo</b><a href="mailto:contacto@huellitassos.com">contacto@huellitassos.com</a></div></div>
+
+        <div class="map-placeholder">
+          <span>🗺️</span>
+          <p>Aquí irá el mapa de Google Maps</p>
+        </div>
+      </div>
+
+      <div class="contact-side">
+        <div class="contact-cta">
+          <h3>¿Es una emergencia?</h3>
+          <p>Llámanos directamente, estamos disponibles 24/7 para atender a tu mascota.</p>
+          <a class="btn primary full" href="tel:+573213673394">📞 Llamar ahora</a>
+        </div>
+        <div class="contact-cta whatsapp">
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>Resolvemos tus dudas y agendamos tu cita de forma rápida.</p>
+          <a class="btn primary full" href="https://wa.me/573213673394" target="_blank" rel="noopener">💬 Abrir WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="logo-huellitas-sos.jpeg" alt="Huellitas SOS">
+      <p>Clínica veterinaria 24/7 en Bogotá. Cuidamos la salud y el bienestar de perros y gatos con amor y profesionalismo.</p>
+    </div>
+    <div>
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#inicio" data-view="inicio">Inicio</a></li>
+        <li><a href="#nosotros" data-view="nosotros">Nosotros</a></li>
+        <li><a href="#servicios" data-view="servicios">Servicios</a></li>
+        <li><a href="#contacto" data-view="contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios" data-view="servicios">Consulta médica</a></li>
+        <li><a href="#servicios" data-view="servicios">Urgencias 24/7</a></li>
+        <li><a href="#petshop" data-view="petshop">Pet Shop</a></li>
+        <li><a href="#spa" data-view="spa">Spa & Estética</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li>📞 <a href="tel:+573213673394">321 367 3394</a></li>
+        <li>📍 Bogotá, Colombia</li>
+        <li>🕐 24 horas · 7 días</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <span>© 2025 Huellitas SOS. Todos los derechos reservados.</span>
+      <span>Hecho con 💚 para las mascotas de Bogotá</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
