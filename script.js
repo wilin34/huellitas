@@ -1,83 +1,155 @@
-/* ============================================================
-   HUELLITAS SOS - JavaScript
-   Navegación entre vistas en la misma página
-============================================================ */
+/* ============ ACORDEÓN DE SERVICIOS ============ */
+.srv-card {
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    overflow: hidden;
+}
 
-document.addEventListener('DOMContentLoaded', () => {
+.srv-card .srv-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 26px;
+    transition: background 0.3s ease;
+    position: relative;
+}
 
-    const views = document.querySelectorAll('.view');
-    const navLinks = document.querySelectorAll('[data-view]');
-    const navLinksContainer = document.getElementById('navLinks');
-    const menuToggle = document.querySelector('.menu-toggle');
+.srv-card .srv-header .srv-icon {
+    width: 54px;
+    height: 54px;
+    font-size: 26px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary-light), #D4F5EA);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0;
+    transition: transform 0.3s ease;
+}
 
-    /* ---------- Cambiar de vista ---------- */
-    function showView(viewId) {
-        // Ocultar todas las vistas
-        views.forEach(v => v.classList.remove('active'));
+.srv-card .srv-header h3 {
+    font-family: "Outfit", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ink);
+    flex: 1;
+    transition: color 0.3s ease;
+}
 
-        // Mostrar la vista seleccionada
-        const target = document.getElementById(viewId);
-        if (target) {
-            target.classList.add('active');
-            // Scroll al top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+.srv-toggle {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--primary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    line-height: 1;
+}
 
-        // Actualizar enlace activo en el menú
-        document.querySelectorAll('.nav-links a').forEach(a => {
-            a.classList.remove('active');
-            if (a.dataset.view === viewId) a.classList.add('active');
-        });
-    }
+.srv-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
 
-    /* ---------- Click en cualquier enlace con data-view ---------- */
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const viewId = link.dataset.view;
-            if (viewId) {
-                showView(viewId);
-                // Cerrar menú móvil
-                navLinksContainer.classList.remove('open');
-                // Actualizar hash sin saltar
-                history.replaceState(null, '', '#' + viewId);
-            }
-        });
-    });
+.srv-card:hover .srv-header .srv-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
 
-    /* ---------- Menú móvil ---------- */
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('open');
-        });
-    }
+.srv-card.active {
+    box-shadow: 0 20px 45px rgba(0, 184, 148, 0.18);
+    border-color: var(--primary);
+}
 
-    /* ---------- Cargar vista desde hash al iniciar ---------- */
-    const initialHash = window.location.hash.replace('#', '');
-    if (initialHash && document.getElementById(initialHash)) {
-        showView(initialHash);
-    }
+.srv-card.active .srv-header {
+    background: linear-gradient(135deg, var(--primary-light), #D4F5EA);
+}
 
-    /* ---------- Formulario de reserva → WhatsApp ---------- */
-    const form = document.getElementById('appointmentForm');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const data = new FormData(form);
+.srv-card.active .srv-header h3 {
+    color: var(--primary-dark);
+}
 
-            const mensaje = `🐾 *Nueva solicitud de cita - Huellitas SOS*%0A%0A` +
-                `*Nombre:* ${encodeURIComponent(data.get('nombre') || '')}%0A` +
-                `*Teléfono:* ${encodeURIComponent(data.get('telefono') || '')}%0A` +
-                `*Mascota:* ${encodeURIComponent(data.get('mascota') || '')}%0A` +
-                `*Especie:* ${encodeURIComponent(data.get('especie') || '')}%0A` +
-                `*Fecha:* ${encodeURIComponent(data.get('fecha') || '')}%0A` +
-                `*Hora:* ${encodeURIComponent(data.get('hora') || '')}%0A` +
-                `*Servicio:* ${encodeURIComponent(data.get('servicio') || '')}%0A` +
-                `*Mensaje:* ${encodeURIComponent(data.get('mensaje') || 'Sin mensaje adicional')}`;
+.srv-card.active .srv-toggle {
+    transform: rotate(135deg);
+    background: var(--primary);
+    color: var(--white);
+}
 
-            window.open(`https://wa.me/573213673394?text=${mensaje}`, '_blank');
-            form.reset();
-        });
-    }
+.srv-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
+    padding: 0 26px;
+    border-top: 1px solid transparent;
+}
 
-});
+.srv-card.active .srv-body {
+    max-height: 500px;
+    padding: 20px 26px 26px;
+    border-top: 1px solid var(--line);
+}
+
+.srv-body p {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.srv-body .srv-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.srv-body .srv-list li {
+    font-size: 13.5px;
+    color: var(--muted);
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.srv-body .srv-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.srv-cta {
+    padding: 12px 22px;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Efecto de gradiente inferior solo cuando está activo */
+.srv-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    border-radius: 0 0 20px 20px;
+}
+
+.srv-card.active::after {
+    transform: scaleX(1);
+}
