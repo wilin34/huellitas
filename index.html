@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="google-site-verification" content="02IBLsQwGrZ2BY2dHwzHbbYxfeO21OzjUV1IXcHWmdY" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="aFbQshgoGU4dvKgk7rENRz8QE_BVlO_lOP3Rd7BvNfI" />
 <meta name="description" content="Huellitas SOS - Clínica veterinaria 24/7 en Bogotá. Salud, bienestar, spa y petshop para perros y gatos.">
-<title>Huellitas SOS | Clínica Veterinaria 24/7</title>
-  <!-- Favicon -->
+<title>Huellitas SOS | Clínica Veterinaria 24/7 en Bogotá</title>
+
+<!-- Favicon -->
 <link rel="icon" type="image/jpeg" href="logo-huellitas-sos.jpeg">
 <link rel="apple-touch-icon" href="logo-huellitas-sos.jpeg">
 
-<!-- Open Graph (vista previa al compartir) -->
+<!-- Open Graph -->
 <meta property="og:title" content="Huellitas SOS | Clínica Veterinaria 24/7 en Bogotá">
 <meta property="og:description" content="Clínica veterinaria integral con urgencias 24/7, spa, petshop y diagnóstico para perros y gatos.">
 <meta property="og:type" content="website">
@@ -26,11 +27,15 @@
 
 <!-- Canonical -->
 <link rel="canonical" href="https://wilin34.github.io/huellitas/">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-  <script type="application/ld+json">
+
+<!-- Datos estructurados -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "VeterinaryCare",
@@ -50,8 +55,7 @@
     "opens": "00:00",
     "closes": "23:59"
   },
-  "description": "Clínica veterinaria 24/7 en Bogotá especializada en perros y gatos. Urgencias, consulta, spa, petshop y diagnóstico integral.",
-  "sameAs": []
+  "description": "Clínica veterinaria 24/7 en Bogotá especializada en perros y gatos. Urgencias, consulta, spa, petshop y diagnóstico integral."
 }
 </script>
 </head>
@@ -255,92 +259,237 @@
 
 
 <!-- ============================================================
-     VISTA SERVICIOS
+     VISTA SERVICIOS (con acordeón expandible)
 ============================================================ -->
 <section class="view" id="servicios">
   <div class="page-head">
     <div class="wrap">
       <span class="eyebrow">NUESTROS SERVICIOS</span>
       <h1>Todo el cuidado que tu mascota necesita.</h1>
-      <p>Un espacio integral para la salud, prevención, diagnóstico y bienestar de tus compañeros de vida.</p>
+      <p>Haz clic en cada servicio para conocer más detalles.</p>
     </div>
   </div>
 
   <section class="section">
     <div class="wrap">
       <div class="services-grid-detailed">
-        <article class="srv-card">
-          <div class="srv-icon">🩺</div>
-          <h3>Consulta médica general</h3>
-          <p>Valoración clínica completa para evaluar el estado general de tu mascota. Incluye revisión de signos vitales, examen físico, historia clínica y plan de tratamiento personalizado.</p>
-          <ul class="srv-list"><li>Consulta preventiva o por enfermedad</li><li>Control de crecimiento para cachorros</li><li>Seguimiento de tratamientos</li></ul>
+
+        <!-- Servicio 1 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🩺</div>
+            <h3>Consulta médica general</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Valoración clínica completa para evaluar el estado general de tu mascota. Incluye revisión de signos vitales, examen físico, historia clínica y plan de tratamiento personalizado.</p>
+            <ul class="srv-list">
+              <li>Consulta preventiva o por enfermedad</li>
+              <li>Control de crecimiento para cachorros</li>
+              <li>Seguimiento de tratamientos</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">💉</div>
-          <h3>Vacunación</h3>
-          <p>Esquemas completos de vacunación para perros y gatos según su edad, estilo de vida y factores de riesgo. Te ayudamos a mantener al día su carné.</p>
-          <ul class="srv-list"><li>Vacunas múltiples (parvovirus, distemper, etc.)</li><li>Antirrábica</li><li>Triple felina y leucemia felina</li></ul>
+
+        <!-- Servicio 2 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">💉</div>
+            <h3>Vacunación</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Esquemas completos de vacunación para perros y gatos según su edad, estilo de vida y factores de riesgo. Te ayudamos a mantener al día su carné.</p>
+            <ul class="srv-list">
+              <li>Vacunas múltiples (parvovirus, distemper, etc.)</li>
+              <li>Antirrábica</li>
+              <li>Triple felina y leucemia felina</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🧪</div>
-          <h3>Laboratorio clínico</h3>
-          <p>Análisis de sangre, orina, heces y pruebas especiales para apoyar diagnósticos precisos. Resultados oportunos para iniciar el tratamiento correcto.</p>
-          <ul class="srv-list"><li>Hemograma y química sanguínea</li><li>Pruebas de coagulación</li><li>Coprológicos y urocultivos</li></ul>
+
+        <!-- Servicio 3 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🧪</div>
+            <h3>Laboratorio clínico</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Análisis de sangre, orina, heces y pruebas especiales para apoyar diagnósticos precisos. Resultados oportunos para iniciar el tratamiento correcto.</p>
+            <ul class="srv-list">
+              <li>Hemograma y química sanguínea</li>
+              <li>Pruebas de coagulación</li>
+              <li>Coprológicos y urocultivos</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🩻</div>
-          <h3>Radiografía (Rayos X)</h3>
-          <p>Imágenes diagnósticas para evaluar huesos, articulaciones, tórax y abdomen. Esencial para detectar fracturas, cuerpos extraños o problemas internos.</p>
-          <ul class="srv-list"><li>Estudios de tórax y abdomen</li><li>Evaluación ortopédica</li><li>Contraste (cuando se requiere)</li></ul>
+
+        <!-- Servicio 4 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🩻</div>
+            <h3>Radiografía (Rayos X)</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Imágenes diagnósticas para evaluar huesos, articulaciones, tórax y abdomen. Esencial para detectar fracturas, cuerpos extraños o problemas internos.</p>
+            <ul class="srv-list">
+              <li>Estudios de tórax y abdomen</li>
+              <li>Evaluación ortopédica</li>
+              <li>Contraste (cuando se requiere)</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🔎</div>
-          <h3>Ecografía</h3>
-          <p>Estudio no invasivo que permite observar órganos internos en tiempo real. Fundamental en el seguimiento de gestaciones, detección de masas o problemas abdominales.</p>
-          <ul class="srv-list"><li>Ecografía abdominal</li><li>Seguimiento de gestación</li><li>Ecocardiografía (según disponibilidad)</li></ul>
+
+        <!-- Servicio 5 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🔎</div>
+            <h3>Ecografía</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Estudio no invasivo que permite observar órganos internos en tiempo real. Fundamental en el seguimiento de gestaciones, detección de masas o problemas abdominales.</p>
+            <ul class="srv-list">
+              <li>Ecografía abdominal</li>
+              <li>Seguimiento de gestación</li>
+              <li>Ecocardiografía (según disponibilidad)</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🚑</div>
-          <h3>Urgencias 24/7</h3>
-          <p>Estamos disponibles todos los días y a toda hora para atender emergencias. Contamos con personal médico preparado para actuar con rapidez.</p>
-          <ul class="srv-list"><li>Intoxicaciones y accidentes</li><li>Dificultad respiratoria</li><li>Golpes de calor y convulsiones</li></ul>
+
+        <!-- Servicio 6 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🚑</div>
+            <h3>Urgencias 24/7</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Estamos disponibles todos los días y a toda hora para atender emergencias. Contamos con personal médico preparado para actuar con rapidez.</p>
+            <ul class="srv-list">
+              <li>Intoxicaciones y accidentes</li>
+              <li>Dificultad respiratoria</li>
+              <li>Golpes de calor y convulsiones</li>
+            </ul>
+            <a class="btn primary srv-cta" href="tel:+573213673394">📞 Llamar ahora</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🐾</div>
-          <h3>Cirugía veterinaria</h3>
-          <p>Procedimientos quirúrgicos programados y de urgencia con protocolos anestésicos seguros y monitoreo constante del paciente.</p>
-          <ul class="srv-list"><li>Esterilización (machos y hembras)</li><li>Cirugías de tejidos blandos</li><li>Extracción de cuerpos extraños</li></ul>
+
+        <!-- Servicio 7 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🐾</div>
+            <h3>Cirugía veterinaria</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Procedimientos quirúrgicos programados y de urgencia con protocolos anestésicos seguros y monitoreo constante del paciente.</p>
+            <ul class="srv-list">
+              <li>Esterilización (machos y hembras)</li>
+              <li>Cirugías de tejidos blandos</li>
+              <li>Extracción de cuerpos extraños</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🦷</div>
-          <h3>Odontología</h3>
-          <p>Diagnóstico y tratamiento de problemas dentales. La salud oral impacta directamente en el bienestar general de tu mascota.</p>
-          <ul class="srv-list"><li>Limpieza dental con ultrasonido</li><li>Extracción de piezas dañadas</li><li>Tratamiento de gingivitis y sarro</li></ul>
+
+        <!-- Servicio 8 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🦷</div>
+            <h3>Odontología</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Diagnóstico y tratamiento de problemas dentales. La salud oral impacta directamente en el bienestar general de tu mascota.</p>
+            <ul class="srv-list">
+              <li>Limpieza dental con ultrasonido</li>
+              <li>Extracción de piezas dañadas</li>
+              <li>Tratamiento de gingivitis y sarro</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🏥</div>
-          <h3>Hospitalización</h3>
-          <p>Área de hospitalización con monitoreo para pacientes que requieren observación, fluidoterapia o cuidados postquirúrgicos.</p>
-          <ul class="srv-list"><li>Cuidado de pacientes críticos</li><li>Fluidoterapia y medicación IV</li><li>Reportes diarios a la familia</li></ul>
+
+        <!-- Servicio 9 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🏥</div>
+            <h3>Hospitalización</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Área de hospitalización con monitoreo para pacientes que requieren observación, fluidoterapia o cuidados postquirúrgicos.</p>
+            <ul class="srv-list">
+              <li>Cuidado de pacientes críticos</li>
+              <li>Fluidoterapia y medicación IV</li>
+              <li>Reportes diarios a la familia</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🥗</div>
-          <h3>Nutrición y dietas</h3>
-          <p>Asesoría nutricional personalizada según la edad, raza, peso y condición médica de tu mascota. Prevenimos y tratamos enfermedades con alimentación adecuada.</p>
-          <ul class="srv-list"><li>Planes para cachorros y adultos</li><li>Dietas para sobrepeso o diabetes</li><li>Alimentos medicados</li></ul>
+
+        <!-- Servicio 10 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🥗</div>
+            <h3>Nutrición y dietas</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Asesoría nutricional personalizada según la edad, raza, peso y condición médica de tu mascota. Prevenimos y tratamos enfermedades con alimentación adecuada.</p>
+            <ul class="srv-list">
+              <li>Planes para cachorros y adultos</li>
+              <li>Dietas para sobrepeso o diabetes</li>
+              <li>Alimentos medicados</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🔬</div>
-          <h3>Exámenes especializados</h3>
-          <p>Pruebas complementarias para diagnósticos específicos: citologías, biopsias y pruebas hormonales o infecciosas.</p>
-          <ul class="srv-list"><li>Citología y biopsia</li><li>Pruebas de leishmania y hemoparásitos</li><li>Perfil tiroideo y hormonal</li></ul>
+
+        <!-- Servicio 11 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🔬</div>
+            <h3>Exámenes especializados</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Pruebas complementarias para diagnósticos específicos: citologías, biopsias y pruebas hormonales o infecciosas.</p>
+            <ul class="srv-list">
+              <li>Citología y biopsia</li>
+              <li>Pruebas de leishmania y hemoparásitos</li>
+              <li>Perfil tiroideo y hormonal</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🐶</div>
-          <h3>Medicina preventiva</h3>
-          <p>Planes de salud preventiva que incluyen desparasitación, control de pulgas y garrapatas, y chequeos periódicos para detectar problemas a tiempo.</p>
-          <ul class="srv-list"><li>Desparasitación interna y externa</li><li>Control de ectoparásitos</li><li>Chequeos anuales</li></ul>
+
+        <!-- Servicio 12 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🐶</div>
+            <h3>Medicina preventiva</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Planes de salud preventiva que incluyen desparasitación, control de pulgas y garrapatas, y chequeos periódicos para detectar problemas a tiempo.</p>
+            <ul class="srv-list">
+              <li>Desparasitación interna y externa</li>
+              <li>Control de ectoparásitos</li>
+              <li>Chequeos anuales</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
+
       </div>
     </div>
   </section>
@@ -441,68 +590,157 @@
 
 
 <!-- ============================================================
-     VISTA SPA
+     VISTA SPA (con acordeón expandible)
 ============================================================ -->
 <section class="view" id="spa">
   <div class="page-head">
     <div class="wrap">
       <span class="eyebrow">SPA & ESTÉTICA</span>
       <h1>Belleza, higiene y relajación para tu mascota.</h1>
-      <p>Un espacio diseñado para que tu compañero se sienta consentido, limpio y feliz, con productos de calidad y personal capacitado.</p>
+      <p>Haz clic en cada servicio para conocer más detalles.</p>
     </div>
   </div>
 
   <section class="section">
     <div class="wrap">
       <div class="services-grid-detailed">
-        <article class="srv-card">
-          <div class="srv-icon">🛁</div>
-          <h3>Baño básico</h3>
-          <p>Baño con productos hipoalergénicos según el tipo de pelaje, secado profesional y cepillado final. Ideal para mantener una higiene regular.</p>
-          <ul class="srv-list"><li>Shampoo según tipo de piel</li><li>Secado y cepillado</li><li>Perfume suave al finalizar</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🛁</div>
+            <h3>Baño básico</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Baño con productos hipoalergénicos según el tipo de pelaje, secado profesional y cepillado final. Ideal para mantener una higiene regular.</p>
+            <ul class="srv-list">
+              <li>Shampoo según tipo de piel</li>
+              <li>Secado y cepillado</li>
+              <li>Perfume suave al finalizar</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">✂️</div>
-          <h3>Corte y peluquería</h3>
-          <p>Corte higiénico o estético adaptado a la raza y al estilo que prefieras. Nuestros peluqueros cuidan cada detalle para un acabado profesional.</p>
-          <ul class="srv-list"><li>Corte de raza o personalizado</li><li>Corte higiénico</li><li>Arreglo de patas y cara</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">✂️</div>
+            <h3>Corte y peluquería</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Corte higiénico o estético adaptado a la raza y al estilo que prefieras. Nuestros peluqueros cuidan cada detalle para un acabado profesional.</p>
+            <ul class="srv-list">
+              <li>Corte de raza o personalizado</li>
+              <li>Corte higiénico</li>
+              <li>Arreglo de patas y cara</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🪮</div>
-          <h3>Cepillado y desenredo</h3>
-          <p>Tratamiento para pelajes enredados o nudos, con productos que ayudan a desenredar sin maltratar el pelo ni la piel.</p>
-          <ul class="srv-list"><li>Desenredo suave</li><li>Cepillado profundo</li><li>Hidratación del pelaje</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🪮</div>
+            <h3>Cepillado y desenredo</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Tratamiento para pelajes enredados o nudos, con productos que ayudan a desenredar sin maltratar el pelo ni la piel.</p>
+            <ul class="srv-list">
+              <li>Desenredo suave</li>
+              <li>Cepillado profundo</li>
+              <li>Hidratación del pelaje</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🦷</div>
-          <h3>Higiene dental</h3>
-          <p>Limpieza dental básica y cepillado para prevenir sarro, mal aliento y problemas mayores. Complemento ideal de la odontología veterinaria.</p>
-          <ul class="srv-list"><li>Cepillado dental</li><li>Spray o gel dental</li><li>Recomendaciones de cuidado en casa</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🦷</div>
+            <h3>Higiene dental</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Limpieza dental básica y cepillado para prevenir sarro, mal aliento y problemas mayores. Complemento ideal de la odontología veterinaria.</p>
+            <ul class="srv-list">
+              <li>Cepillado dental</li>
+              <li>Spray o gel dental</li>
+              <li>Recomendaciones de cuidado en casa</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">💅</div>
-          <h3>Corte de uñas</h3>
-          <p>Corte seguro de uñas con herramientas adecuadas para evitar lesiones, seguido de limado para un acabado suave.</p>
-          <ul class="srv-list"><li>Corte seguro</li><li>Limado final</li><li>Revisión de almohadillas</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">💅</div>
+            <h3>Corte de uñas</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Corte seguro de uñas con herramientas adecuadas para evitar lesiones, seguido de limado para un acabado suave.</p>
+            <ul class="srv-list">
+              <li>Corte seguro</li>
+              <li>Limado final</li>
+              <li>Revisión de almohadillas</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🌸</div>
-          <h3>Spa relajante</h3>
-          <p>Sesión de spa con masajes, aromaterapia suave y tratamientos especiales para consentir a tu mascota y reducir su estrés.</p>
-          <ul class="srv-list"><li>Masaje relajante</li><li>Aromaterapia pet-safe</li><li>Tratamiento hidratante</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🌸</div>
+            <h3>Spa relajante</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Sesión de spa con masajes, aromaterapia suave y tratamientos especiales para consentir a tu mascota y reducir su estrés.</p>
+            <ul class="srv-list">
+              <li>Masaje relajante</li>
+              <li>Aromaterapia pet-safe</li>
+              <li>Tratamiento hidratante</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🧴</div>
-          <h3>Tratamientos dermatológicos</h3>
-          <p>Baños medicados y tratamientos específicos para pieles sensibles, con alergias o afecciones dermatológicas diagnosticadas.</p>
-          <ul class="srv-list"><li>Baños medicados</li><li>Tratamiento antimicótico</li><li>Hidratación intensiva</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🧴</div>
+            <h3>Tratamientos dermatológicos</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Baños medicados y tratamientos específicos para pieles sensibles, con alergias o afecciones dermatológicas diagnosticadas.</p>
+            <ul class="srv-list">
+              <li>Baños medicados</li>
+              <li>Tratamiento antimicótico</li>
+              <li>Hidratación intensiva</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
-        <article class="srv-card">
-          <div class="srv-icon">🎀</div>
-          <h3>Paquete completo</h3>
-          <p>Nuestro servicio estrella: baño, corte, cepillado, uñas, higiene dental y perfume. Todo lo que tu mascota necesita en una sola sesión.</p>
-          <ul class="srv-list"><li>Baño + corte + cepillado</li><li>Uñas + oídos + dientes</li><li>Perfume y lazo decorativo</li></ul>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🎀</div>
+            <h3>Paquete completo</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Nuestro servicio estrella: baño, corte, cepillado, uñas, higiene dental y perfume. Todo lo que tu mascota necesita en una sola sesión.</p>
+            <ul class="srv-list">
+              <li>Baño + corte + cepillado</li>
+              <li>Uñas + oídos + dientes</li>
+              <li>Perfume y lazo decorativo</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
         </article>
+
       </div>
     </div>
   </section>
