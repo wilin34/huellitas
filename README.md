@@ -24,4 +24,4 @@ Huellitas SOS es una clínica veterinaria creada para brindar atención integral
 
 ![imagen perrito](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKIw3b0OpycyPzORoFuPgpMH5uSrw2FdBAWP94VRjbE0EwfJmtcAJGotaP&s=10)
 
-![imagen perrito](https://drive.google.com/file/d/1X_1prDCx3QpHEXod8lzY8PgXTRD7VQTu/view?usp=sharing)
+![interfaz de pagina](https://drive.google.com/file/d/1X_1prDCx3QpHEXod8lzY8PgXTRD7VQTu/view?usp=sharing)
