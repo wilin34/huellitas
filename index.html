@@ -60,7 +60,26 @@
 </script>
 </head>
 <body>
-
+<!-- Botón flotante de VetLuz -->
+<div id="vetluz-widget">
+  <button id="vetluz-toggle" aria-label="Abrir asistente virtual VetLuz">
+    <img src="https://verba.ink/favicon.ico" alt="VetLuz" onerror="this.style.display='none'">
+    <span>🐾 Asistente VetLuz</span>
+  </button>
+  
+  <div id="vetluz-modal">
+    <div class="vetluz-header">
+      <span>🩺 VetLuz - Asistente Virtual</span>
+      <button id="vetluz-close" aria-label="Cerrar">✕</button>
+    </div>
+    <iframe 
+      src="https://verba.ink/v/vetluz_bvf" 
+      title="VetLuz - Asistente Veterinario"
+      allow="microphone; clipboard-write"
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="wrap topbar-in">
