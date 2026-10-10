@@ -245,3 +245,28 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('%c📞 321 367 3394', 'color: #FF6B6B; font-size: 14px; font-weight: bold;');
 
 });
+// --- Lógica del Widget de VetLuz ---
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleBtn = document.getElementById('vetluz-toggle');
+  const modal = document.getElementById('vetluz-modal');
+  const closeBtn = document.getElementById('vetluz-close');
+
+  if (toggleBtn && modal) {
+    toggleBtn.addEventListener('click', () => {
+      modal.classList.toggle('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    // Cerrar al hacer clic fuera del modal
+    document.addEventListener('click', (e) => {
+      if (modal.classList.contains('active') && 
+          !modal.contains(e.target) && 
+          !toggleBtn.contains(e.target)) {
+        modal.classList.remove('active');
+      }
+    });
+  }
+});
