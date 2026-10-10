@@ -1,272 +1,1056 @@
-/* ============================================================
-   HUELLITAS SOS - JavaScript Completo
-   Versión: 1.0
-   Incluye:
-   - Navegación entre vistas (SPA)
-   - Menú móvil
-   - Acordeón de servicios
-   - Formulario hacia WhatsApp
-   - Manejo de hash en la URL
-============================================================ */
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="aFbQshgoGU4dvKgk7rENRz8QE_BVlO_lOP3Rd7BvNfI" />
+<meta name="description" content="Huellitas SOS - Clínica veterinaria 24/7 en Bogotá. Salud, bienestar, spa y petshop para perros y gatos.">
+<title>Huellitas SOS | Clínica Veterinaria 24/7 en Bogotá</title>
 
-document.addEventListener('DOMContentLoaded', () => {
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="logo-huellitas-sos.jpeg">
+<link rel="apple-touch-icon" href="logo-huellitas-sos.jpeg">
 
-    /* ============================================================
-       1. VARIABLES GLOBALES
-    ============================================================ */
-    const views = document.querySelectorAll('.view');
-    const navLinks = document.querySelectorAll('[data-view]');
-    const navLinksContainer = document.getElementById('navLinks');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const serviceCards = document.querySelectorAll('[data-service]');
-    const form = document.getElementById('appointmentForm');
+<!-- Open Graph -->
+<meta property="og:title" content="Huellitas SOS | Clínica Veterinaria 24/7 en Bogotá">
+<meta property="og:description" content="Clínica veterinaria integral con urgencias 24/7, spa, petshop y diagnóstico para perros y gatos.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wilin34.github.io/huellitas/">
+<meta property="og:image" content="https://wilin34.github.io/huellitas/logo-huellitas-sos.jpeg">
+<meta property="og:locale" content="es_CO">
 
-    /* ============================================================
-       2. NAVEGACIÓN ENTRE VISTAS (SPA)
-    ============================================================ */
-    function showView(viewId) {
-        // Ocultar todas las vistas
-        views.forEach(v => v.classList.remove('active'));
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Huellitas SOS | Clínica Veterinaria 24/7">
+<meta name="twitter:description" content="Cuidamos la salud y bienestar de perros y gatos en Bogotá.">
+<meta name="twitter:image" content="https://wilin34.github.io/huellitas/logo-huellitas-sos.jpeg">
 
-        // Mostrar la vista seleccionada
-        const target = document.getElementById(viewId);
-        if (target) {
-            target.classList.add('active');
-            // Scroll suave al top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+<!-- Canonical -->
+<link rel="canonical" href="https://wilin34.github.io/huellitas/">
 
-        // Actualizar enlace activo en el menú
-        document.querySelectorAll('.nav-links a').forEach(a => {
-            a.classList.remove('active');
-            if (a.dataset.view === viewId) {
-                a.classList.add('active');
-            }
-        });
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-        // Cerrar menú móvil si está abierto
-        if (navLinksContainer) {
-            navLinksContainer.classList.remove('open');
-        }
+<!-- Datos estructurados -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VeterinaryCare",
+  "name": "Huellitas SOS",
+  "image": "https://wilin34.github.io/huellitas/logo-huellitas-sos.jpeg",
+  "url": "https://wilin34.github.io/huellitas/",
+  "telephone": "+573213673394",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bogotá",
+    "addressCountry": "CO"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "description": "Clínica veterinaria 24/7 en Bogotá especializada en perros y gatos. Urgencias, consulta, spa, petshop y diagnóstico integral."
+}
+</script>
 
-        // Actualizar hash de la URL sin hacer scroll
-        if (history.replaceState) {
-            history.replaceState(null, '', '#' + viewId);
-        }
-    }
-
-    /* ============================================================
-       3. CLICK EN ENLACES DE NAVEGACIÓN
-    ============================================================ */
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const viewId = link.dataset.view;
-            if (viewId) {
-                showView(viewId);
-            }
-        });
-    });
-
-    /* ============================================================
-       4. MENÚ MÓVIL (☰)
-    ============================================================ */
-    if (menuToggle && navLinksContainer) {
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navLinksContainer.classList.toggle('open');
-        });
-
-        // Cerrar menú al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            if (!navLinksContainer.contains(e.target) && !menuToggle.contains(e.target)) {
-                navLinksContainer.classList.remove('open');
-            }
-        });
-    }
-
-    /* ============================================================
-       5. CARGAR VISTA SEGÚN EL HASH DE LA URL
-    ============================================================ */
-    const initialHash = window.location.hash.replace('#', '');
-    if (initialHash && document.getElementById(initialHash)) {
-        showView(initialHash);
-    }
-
-    // Escuchar cambios en el hash (por si el usuario usa atrás/adelante)
-    window.addEventListener('hashchange', () => {
-        const hash = window.location.hash.replace('#', '');
-        if (hash && document.getElementById(hash)) {
-            showView(hash);
-        }
-    });
-
-    /* ============================================================
-       6. ACORDEÓN DE SERVICIOS
-       Al hacer clic se expande y muestra más info
-    ============================================================ */
-    serviceCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            // Si el clic fue en el botón de "Reservar" o en un enlace, no hacer toggle
-            if (e.target.closest('.srv-cta') || e.target.closest('a')) {
-                return;
-            }
-
-            const isActive = card.classList.contains('active');
-
-            // Cerrar todas las tarjetas (solo una abierta a la vez)
-            serviceCards.forEach(c => c.classList.remove('active'));
-
-            // Si no estaba activa, abrirla
-            if (!isActive) {
-                card.classList.add('active');
-            }
-        });
-    });
-
-    /* ============================================================
-       7. FORMULARIO DE CITA → WHATSAPP
-    ============================================================ */
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Obtener datos del formulario
-            const data = new FormData(form);
-            const nombre = data.get('nombre') || '';
-            const telefono = data.get('telefono') || '';
-            const mascota = data.get('mascota') || '';
-            const especie = data.get('especie') || '';
-            const fecha = data.get('fecha') || '';
-            const hora = data.get('hora') || '';
-            const servicio = data.get('servicio') || '';
-            const mensaje = data.get('mensaje') || 'Sin mensaje adicional';
-
-            // Construir mensaje para WhatsApp
-            const texto = `🐾 *Nueva solicitud de cita - Huellitas SOS*%0A%0A` +
-                `👤 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
-                `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
-                `🐶 *Mascota:* ${encodeURIComponent(mascota)}%0A` +
-                `🐱 *Especie:* ${encodeURIComponent(especie)}%0A` +
-                `📅 *Fecha:* ${encodeURIComponent(fecha)}%0A` +
-                `⏰ *Hora:* ${encodeURIComponent(hora)}%0A` +
-                `🩺 *Servicio:* ${encodeURIComponent(servicio)}%0A` +
-                `📝 *Mensaje:* ${encodeURIComponent(mensaje)}`;
-
-            // Abrir WhatsApp
-            const urlWhatsApp = `https://wa.me/573213673394?text=${texto}`;
-            window.open(urlWhatsApp, '_blank');
-
-            // Limpiar formulario
-            form.reset();
-
-            // Mostrar confirmación visual
-            alert('✅ ¡Solicitud enviada! Se abrirá WhatsApp con tu mensaje listo.');
-        });
-    }
-
-    /* ============================================================
-       8. SCROLL SUAVE PARA ANCLAS INTERNAS
-    ============================================================ */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            // Solo procesar si NO tiene data-view (los data-view los maneja showView)
-            if (!this.dataset.view && href !== '#' && document.querySelector(href)) {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    const headerOffset = 90;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
-    /* ============================================================
-       9. HEADER STICKY CON SCROLL
-    ============================================================ */
-    const header = document.getElementById('header');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (header) {
-            if (currentScroll > 50) {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.02)';
-            }
-        }
-
-        lastScroll = currentScroll;
-    });
-
-    /* ============================================================
-       10. ANIMACIÓN DE APARICIÓN AL HACER SCROLL
-    ============================================================ */
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Aplicar animación a tarjetas y secciones
-    const animatableElements = document.querySelectorAll(
-        '.welcome-card, .srv-card, .shop-card, .mvv-card, .reason, .contact-cta'
-    );
-
-    animatableElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    /* ============================================================
-       11. CONSOLA: MENSAJE DE BIENVENIDA
-    ============================================================ */
-    console.log('%c🐾 Huellitas SOS', 'color: #00B894; font-size: 20px; font-weight: bold;');
-    console.log('%cClínica Veterinaria 24/7 en Bogotá', 'color: #5C6B73; font-size: 14px;');
-    console.log('%c📞 321 367 3394', 'color: #FF6B6B; font-size: 14px; font-weight: bold;');
-
-});
-// --- Lógica del Widget de VetLuz ---
-document.addEventListener('DOMContentLoaded', function() {
-  const toggleBtn = document.getElementById('vetluz-toggle');
-  const modal = document.getElementById('vetluz-modal');
-  const closeBtn = document.getElementById('vetluz-close');
-
-  if (toggleBtn && modal) {
-    toggleBtn.addEventListener('click', () => {
-      modal.classList.toggle('active');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-
-    // Cerrar al hacer clic fuera del modal
-    document.addEventListener('click', (e) => {
-      if (modal.classList.contains('active') && 
-          !modal.contains(e.target) && 
-          !toggleBtn.contains(e.target)) {
-        modal.classList.remove('active');
-      }
-    });
+<!-- ===== ESTILOS DEL WIDGET VETLUZ ===== -->
+<style>
+  #vetluz-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'DM Sans', sans-serif;
   }
-});
+
+  #vetluz-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #10b981;
+    color: white;
+    border: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  #vetluz-toggle:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.7);
+  }
+
+  #vetluz-toggle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  #vetluz-modal {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 380px;
+    height: 600px;
+    max-height: 80vh;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  #vetluz-modal.active {
+    display: flex;
+  }
+
+  .vetluz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #10b981;
+    color: white;
+    padding: 12px 16px;
+    font-weight: 600;
+  }
+
+  #vetluz-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  #vetluz-modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    flex-grow: 1;
+  }
+
+  @media (max-width: 480px) {
+    #vetluz-modal {
+      width: calc(100vw - 20px);
+      right: 10px;
+      bottom: 90px;
+    }
+    #vetluz-toggle {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+
+<!-- ===== SCRIPT DEL WIDGET VETLUZ ===== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('vetluz-toggle');
+    const modal = document.getElementById('vetluz-modal');
+    const closeBtn = document.getElementById('vetluz-close');
+
+    if (toggleBtn && modal) {
+      toggleBtn.addEventListener('click', () => {
+        modal.classList.toggle('active');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (modal.classList.contains('active') && 
+            !modal.contains(e.target) && 
+            !toggleBtn.contains(e.target)) {
+          modal.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+</head>
+<body>
+
+<!-- ===== WIDGET VETLUZ (BOTÓN FLOTANTE) ===== -->
+<div id="vetluz-widget">
+  <button id="vetluz-toggle" aria-label="Abrir asistente virtual VetLuz">
+    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=200&q=80" alt="Asistente VetLuz - Perrito">
+  </button>
+  
+  <div id="vetluz-modal">
+    <div class="vetluz-header">
+      <span>🩺 VetLuz - Asistente Virtual</span>
+      <button id="vetluz-close" aria-label="Cerrar">✕</button>
+    </div>
+    <iframe 
+      src="https://verba.ink/v/vetluz_bvf" 
+      title="VetLuz - Asistente Veterinario"
+      allow="microphone; clipboard-write"
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span>🐾 Atención veterinaria 24 horas · 7 días a la semana</span>
+    <a href="tel:+573213673394">📞 321 367 3394</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="wrap nav">
+    <a href="#inicio" class="brand" data-view="inicio">
+      <img src="logo-huellitas-sos.jpeg" alt="Logo Huellitas SOS">
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#inicio" data-view="inicio" class="active">Inicio</a>
+      <a href="#nosotros" data-view="nosotros">Nosotros</a>
+      <a href="#servicios" data-view="servicios">Servicios</a>
+      <a href="#petshop" data-view="petshop">Pet Shop</a>
+      <a href="#spa" data-view="spa">Spa</a>
+      <a href="#contacto" data-view="contacto">Contacto</a>
+      <a class="nav-cta" href="#reservar" data-view="reservar">Reservar cita</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     VISTA INICIO
+============================================================ -->
+<section class="view active" id="inicio">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="pill"><span class="pill-dot"></span> Estamos disponibles 24/7</div>
+        <h1>Donde cada <em>huellita</em> recibe cuidado y amor.</h1>
+        <p>Clínica veterinaria integral en Bogotá para cuidar la salud, bienestar y felicidad de perros y gatos en cada etapa de su vida.</p>
+        <div class="hero-buttons">
+          <a class="btn primary" href="#reservar" data-view="reservar">Reservar una cita <span>→</span></a>
+          <a class="btn ghost" href="#servicios" data-view="servicios">Conocer servicios</a>
+        </div>
+        <div class="hero-points">
+          <span>✓ Atención 24/7</span><span>✓ Diagnóstico integral</span><span>✓ Petshop & Spa</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img class="hero-img" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85" alt="Perro feliz en la veterinaria">
+        <div class="hero-card">
+          <div class="emergency-badge">EMERGENCIAS</div>
+          <strong>¿Tu mascota necesita atención?</strong>
+          <p>Estamos disponibles día y noche para acompañarte cuando más nos necesitas.</p>
+          <a href="tel:+573213673394">Llamar ahora →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div><b>24/7</b><span>Atención veterinaria</span></div>
+      <div><b>🐶 🐱</b><span>Perros y gatos</span></div>
+      <div><b>10+</b><span>Servicios especializados</span></div>
+      <div><b>📍</b><span>Bogotá, Colombia</span></div>
+    </div>
+  </section>
+
+  <section class="section welcome">
+    <div class="wrap">
+      <div class="section-head">
+        <span>BIENVENIDOS A HUELLITAS SOS</span>
+        <h2>Un lugar pensado para el bienestar de tu mascota.</h2>
+        <p>Somos una clínica veterinaria integral en Bogotá. Combinamos medicina preventiva, diagnóstico, urgencias 24/7, estética y tienda especializada, para que tu compañero reciba todo el cuidado que merece en un solo lugar.</p>
+      </div>
+      <div class="welcome-grid">
+        <article class="welcome-card">
+          <div class="welcome-icon">🏥</div>
+          <h3>Clínica veterinaria</h3>
+          <p>Consulta médica, vacunación, laboratorio, radiografía, ecografía, odontología, cirugía y hospitalización con profesionales certificados.</p>
+        </article>
+        <article class="welcome-card">
+          <div class="welcome-icon">🚑</div>
+          <h3>Urgencias 24/7</h3>
+          <p>Atención médica inmediata los 365 días del año. Siempre hay un veterinario disponible para tu mascota, a cualquier hora.</p>
+        </article>
+        <article class="welcome-card">
+          <div class="welcome-icon">🛍️</div>
+          <h3>Pet Shop</h3>
+          <p>Alimentos premium, accesorios, juguetes, higiene y todos los productos que tu mascota necesita, con asesoría especializada.</p>
+        </article>
+        <article class="welcome-card">
+          <div class="welcome-icon">✨</div>
+          <h3>Spa & Estética</h3>
+          <p>Baño, corte, cepillado, higiene dental y tratamientos de relajación con productos hipoalergénicos y personal capacitado.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-band-in">
+      <div>
+        <h3>¿Listo para consentir a tu mascota?</h3>
+        <p>Agenda su cita en menos de un minuto y recibe atención personalizada.</p>
+      </div>
+      <a class="btn primary" href="#reservar" data-view="reservar">Reservar cita ahora →</a>
+    </div>
+  </section>
+</section>
+
+
+<!-- ============================================================
+     VISTA NOSOTROS
+============================================================ -->
+<section class="view" id="nosotros">
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">SOBRE NOSOTROS</span>
+      <h1>Más que una veterinaria, un lugar para sentirse en casa.</h1>
+      <p>Conoce nuestra historia, lo que nos mueve y el equipo que cuida de tu mascota como si fuera nuestra.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap about-grid">
+      <div class="about-photo">
+        <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1200&q=85" alt="Veterinaria atendiendo una mascota">
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">NUESTRA HISTORIA</span>
+        <h2>Nacimos del amor por los animales.</h2>
+        <p>Huellitas SOS nació en Bogotá con una idea clara: crear un espacio donde las mascotas reciban atención médica de alta calidad y donde sus familias se sientan acompañadas, escuchadas y bien asesoradas.</p>
+        <p>Hoy somos una clínica veterinaria integral que funciona 24 horas al día, 7 días a la semana. Atendemos perros y gatos de todas las edades, con un enfoque preventivo, humano y personalizado.</p>
+        <p>Creemos que cada huellita cuenta una historia, y nuestro trabajo es cuidar de esa historia en cada etapa de la vida.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="mvv-grid">
+        <article class="mvv-card">
+          <div class="mvv-icon">🎯</div>
+          <h3>Misión</h3>
+          <p>Brindar atención veterinaria integral, humana y de alta calidad a perros y gatos en Bogotá, promoviendo su salud, bienestar y calidad de vida, y acompañando a sus familias con cercanía, ética y profesionalismo.</p>
+        </article>
+        <article class="mvv-card">
+          <div class="mvv-icon">🌟</div>
+          <h3>Visión</h3>
+          <p>Ser reconocidos en 2030 como la clínica veterinaria de referencia en Bogotá por la calidez de nuestro trato, la excelencia médica de nuestro equipo y la innovación constante de nuestros servicios.</p>
+        </article>
+        <article class="mvv-card">
+          <div class="mvv-icon">💚</div>
+          <h3>Valores</h3>
+          <ul class="mvv-list">
+            <li><b>Amor por los animales:</b> cada paciente es tratado como parte de nuestra familia.</li>
+            <li><b>Ética profesional:</b> actuamos con transparencia y responsabilidad.</li>
+            <li><b>Cercanía:</b> escuchamos y acompañamos a cada familia.</li>
+            <li><b>Excelencia:</b> formación continua y tecnología al servicio del bienestar animal.</li>
+            <li><b>Compromiso 24/7:</b> estamos cuando más nos necesitan.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span>¿POR QUÉ ELEGIRNOS?</span>
+        <h2>Razones para confiar en Huellitas SOS.</h2>
+      </div>
+      <div class="reasons-grid">
+        <div class="reason"><b>✓</b><div><h4>Atención 24/7 real</h4><p>Médicos veterinarios disponibles todos los días del año para urgencias.</p></div></div>
+        <div class="reason"><b>✓</b><div><h4>Servicios integrales</h4><p>Consulta, diagnóstico, cirugía, hospitalización, spa y petshop en un mismo lugar.</p></div></div>
+        <div class="reason"><b>✓</b><div><h4>Equipo certificado</h4><p>Profesionales con formación continua y experiencia en pequeñas especies.</p></div></div>
+        <div class="reason"><b>✓</b><div><h4>Tecnología diagnóstica</h4><p>Laboratorio, rayos X y ecografía para diagnósticos precisos y oportunos.</p></div></div>
+        <div class="reason"><b>✓</b><div><h4>Trato cálido</h4><p>Ambiente amigable y sin estrés para tu mascota y para ti.</p></div></div>
+        <div class="reason"><b>✓</b><div><h4>Precios justos</h4><p>Tarifas transparentes, sin sorpresas, con planes adaptados a cada familia.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-band-in">
+      <div>
+        <h3>Ven a conocernos.</h3>
+        <p>Te esperamos con las puertas abiertas para ti y tu mascota.</p>
+      </div>
+      <a class="btn primary" href="#contacto" data-view="contacto">Ver cómo llegar →</a>
+    </div>
+  </section>
+</section>
+
+
+<!-- ============================================================
+     VISTA SERVICIOS (con acordeón expandible)
+============================================================ -->
+<section class="view" id="servicios">
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">NUESTROS SERVICIOS</span>
+      <h1>Todo el cuidado que tu mascota necesita.</h1>
+      <p>Haz clic en cada servicio para conocer más detalles.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="services-grid-detailed">
+
+        <!-- Servicio 1 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🩺</div>
+            <h3>Consulta médica general</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Valoración clínica completa para evaluar el estado general de tu mascota. Incluye revisión de signos vitales, examen físico, historia clínica y plan de tratamiento personalizado.</p>
+            <ul class="srv-list">
+              <li>Consulta preventiva o por enfermedad</li>
+              <li>Control de crecimiento para cachorros</li>
+              <li>Seguimiento de tratamientos</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 2 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">💉</div>
+            <h3>Vacunación</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Esquemas completos de vacunación para perros y gatos según su edad, estilo de vida y factores de riesgo. Te ayudamos a mantener al día su carné.</p>
+            <ul class="srv-list">
+              <li>Vacunas múltiples (parvovirus, distemper, etc.)</li>
+              <li>Antirrábica</li>
+              <li>Triple felina y leucemia felina</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 3 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🧪</div>
+            <h3>Laboratorio clínico</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Análisis de sangre, orina, heces y pruebas especiales para apoyar diagnósticos precisos. Resultados oportunos para iniciar el tratamiento correcto.</p>
+            <ul class="srv-list">
+              <li>Hemograma y química sanguínea</li>
+              <li>Pruebas de coagulación</li>
+              <li>Coprológicos y urocultivos</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 4 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🩻</div>
+            <h3>Radiografía (Rayos X)</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Imágenes diagnósticas para evaluar huesos, articulaciones, tórax y abdomen. Esencial para detectar fracturas, cuerpos extraños o problemas internos.</p>
+            <ul class="srv-list">
+              <li>Estudios de tórax y abdomen</li>
+              <li>Evaluación ortopédica</li>
+              <li>Contraste (cuando se requiere)</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 5 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🔎</div>
+            <h3>Ecografía</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Estudio no invasivo que permite observar órganos internos en tiempo real. Fundamental en el seguimiento de gestaciones, detección de masas o problemas abdominales.</p>
+            <ul class="srv-list">
+              <li>Ecografía abdominal</li>
+              <li>Seguimiento de gestación</li>
+              <li>Ecocardiografía (según disponibilidad)</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 6 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🚑</div>
+            <h3>Urgencias 24/7</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Estamos disponibles todos los días y a toda hora para atender emergencias. Contamos con personal médico preparado para actuar con rapidez.</p>
+            <ul class="srv-list">
+              <li>Intoxicaciones y accidentes</li>
+              <li>Dificultad respiratoria</li>
+              <li>Golpes de calor y convulsiones</li>
+            </ul>
+            <a class="btn primary srv-cta" href="tel:+573213673394">📞 Llamar ahora</a>
+          </div>
+        </article>
+
+        <!-- Servicio 7 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🐾</div>
+            <h3>Cirugía veterinaria</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Procedimientos quirúrgicos programados y de urgencia con protocolos anestésicos seguros y monitoreo constante del paciente.</p>
+            <ul class="srv-list">
+              <li>Esterilización (machos y hembras)</li>
+              <li>Cirugías de tejidos blandos</li>
+              <li>Extracción de cuerpos extraños</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 8 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🦷</div>
+            <h3>Odontología</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Diagnóstico y tratamiento de problemas dentales. La salud oral impacta directamente en el bienestar general de tu mascota.</p>
+            <ul class="srv-list">
+              <li>Limpieza dental con ultrasonido</li>
+              <li>Extracción de piezas dañadas</li>
+              <li>Tratamiento de gingivitis y sarro</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 9 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🏥</div>
+            <h3>Hospitalización</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Área de hospitalización con monitoreo para pacientes que requieren observación, fluidoterapia o cuidados postquirúrgicos.</p>
+            <ul class="srv-list">
+              <li>Cuidado de pacientes críticos</li>
+              <li>Fluidoterapia y medicación IV</li>
+              <li>Reportes diarios a la familia</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 10 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🥗</div>
+            <h3>Nutrición y dietas</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Asesoría nutricional personalizada según la edad, raza, peso y condición médica de tu mascota. Prevenimos y tratamos enfermedades con alimentación adecuada.</p>
+            <ul class="srv-list">
+              <li>Planes para cachorros y adultos</li>
+              <li>Dietas para sobrepeso o diabetes</li>
+              <li>Alimentos medicados</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 11 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🔬</div>
+            <h3>Exámenes especializados</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Pruebas complementarias para diagnósticos específicos: citologías, biopsias y pruebas hormonales o infecciosas.</p>
+            <ul class="srv-list">
+              <li>Citología y biopsia</li>
+              <li>Pruebas de leishmania y hemoparásitos</li>
+              <li>Perfil tiroideo y hormonal</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <!-- Servicio 12 -->
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🐶</div>
+            <h3>Medicina preventiva</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Planes de salud preventiva que incluyen desparasitación, control de pulgas y garrapatas, y chequeos periódicos para detectar problemas a tiempo.</p>
+            <ul class="srv-list">
+              <li>Desparasitación interna y externa</li>
+              <li>Control de ectoparásitos</li>
+              <li>Chequeos anuales</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-band-in">
+      <div>
+        <h3>¿Necesitas uno de nuestros servicios?</h3>
+        <p>Agenda tu cita y recibe atención personalizada en nuestra clínica.</p>
+      </div>
+      <a class="btn primary" href="#reservar" data-view="reservar">Reservar cita →</a>
+    </div>
+  </section>
+</section>
+
+
+<!-- ============================================================
+     VISTA PET SHOP
+============================================================ -->
+<section class="view" id="petshop">
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">PET SHOP</span>
+      <h1>Todo para consentir a tu mascota.</h1>
+      <p>Alimentos, accesorios, higiene y productos seleccionados con asesoría profesional para que elijas lo mejor para tu compañero.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span>CATEGORÍAS</span>
+        <h2>Explora nuestras categorías.</h2>
+      </div>
+      <div class="shop-grid">
+        <article class="shop-card">
+          <div class="shop-icon">🍖</div>
+          <h3>Alimentos</h3>
+          <p>Concentrados secos y húmedos para cachorros, adultos y senior. Marcas premium y alimentos medicados para necesidades específicas.</p>
+          <ul class="shop-list"><li>Concentrados premium</li><li>Alimento húmedo y snacks</li><li>Dietas veterinarias</li></ul>
+        </article>
+        <article class="shop-card">
+          <div class="shop-icon">🦴</div>
+          <h3>Snacks y premios</h3>
+          <p>Premios ideales para entrenamiento o para consentir a tu mascota. Opciones naturales, sin colorantes y con sabores que aman.</p>
+          <ul class="shop-list"><li>Huesos y snacks dentales</li><li>Premios de entrenamiento</li><li>Galletas naturales</li></ul>
+        </article>
+        <article class="shop-card">
+          <div class="shop-icon">🎾</div>
+          <h3>Juguetes</h3>
+          <p>Juguetes interactivos, mordedores, pelotas y juguetes de inteligencia para estimular el cuerpo y la mente de tu mascota.</p>
+          <ul class="shop-list"><li>Juguetes de cuerda y goma</li><li>Pelotas y lanzadores</li><li>Juguetes de olfato e inteligencia</li></ul>
+        </article>
+        <article class="shop-card">
+          <div class="shop-icon">🛏️</div>
+          <h3>Descanso y camas</h3>
+          <p>Camas, cojines y casitas para que tu mascota descanse cómoda y segura, con materiales fáciles de lavar.</p>
+          <ul class="shop-list"><li>Camas y cojines</li><li>Cobijas y mantas</li><li>Casitas y transportadoras</li></ul>
+        </article>
+        <article class="shop-card">
+          <div class="shop-icon">🦮</div>
+          <h3>Accesorios de paseo</h3>
+          <p>Collares, pecheras, correas y arneses de calidad para paseos cómodos y seguros, adaptados a cada tamaño.</p>
+          <ul class="shop-list"><li>Pecheras y arneses</li><li>Collares antigarras</li><li>Correas y pretales</li></ul>
+        </article>
+        <article class="shop-card">
+          <div class="shop-icon">🧴</div>
+          <h3>Higiene y cuidado</h3>
+          <p>Shampoos, acondicionadores, cepillos y productos de higiene para mantener a tu mascota limpia, sana y con un pelaje brillante.</p>
+          <ul class="shop-list"><li>Shampoos hipoalergénicos</li><li>Cepillos y cardinas</li><li>Toallitas y desodorantes</li></ul>
+        </article>
+        <article class="shop-card">
+          <div class="shop-icon">💊</div>
+          <h3>Salud y medicamentos</h3>
+          <p>Desparasitantes, antipulgas, suplementos vitamínicos y medicamentos formulados por nuestros veterinarios.</p>
+          <ul class="shop-list"><li>Antipulgas y garrapatas</li><li>Desparasitantes</li><li>Vitaminas y suplementos</li></ul>
+        </article>
+        <article class="shop-card">
+          <div class="shop-icon">🐱</div>
+          <h3>Línea para gatos</h3>
+          <p>Todo lo que un gato necesita: areneros, arena aglutinante, rascadores, fuentes de agua y juguetes felinos.</p>
+          <ul class="shop-list"><li>Areneros y arenas</li><li>Rascadores y torres</li><li>Fuentes y bebederos</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-band-in">
+      <div>
+        <h3>¿Buscas un producto específico?</h3>
+        <p>Escríbenos y te ayudamos a encontrarlo o te lo pedimos especialmente.</p>
+      </div>
+      <a class="btn primary" href="#contacto" data-view="contacto">Contáctanos →</a>
+    </div>
+  </section>
+</section>
+
+
+<!-- ============================================================
+     VISTA SPA (con acordeón expandible)
+============================================================ -->
+<section class="view" id="spa">
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">SPA & ESTÉTICA</span>
+      <h1>Belleza, higiene y relajación para tu mascota.</h1>
+      <p>Haz clic en cada servicio para conocer más detalles.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="services-grid-detailed">
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🛁</div>
+            <h3>Baño básico</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Baño con productos hipoalergénicos según el tipo de pelaje, secado profesional y cepillado final. Ideal para mantener una higiene regular.</p>
+            <ul class="srv-list">
+              <li>Shampoo según tipo de piel</li>
+              <li>Secado y cepillado</li>
+              <li>Perfume suave al finalizar</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">✂️</div>
+            <h3>Corte y peluquería</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Corte higiénico o estético adaptado a la raza y al estilo que prefieras. Nuestros peluqueros cuidan cada detalle para un acabado profesional.</p>
+            <ul class="srv-list">
+              <li>Corte de raza o personalizado</li>
+              <li>Corte higiénico</li>
+              <li>Arreglo de patas y cara</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🪮</div>
+            <h3>Cepillado y desenredo</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Tratamiento para pelajes enredados o nudos, con productos que ayudan a desenredar sin maltratar el pelo ni la piel.</p>
+            <ul class="srv-list">
+              <li>Desenredo suave</li>
+              <li>Cepillado profundo</li>
+              <li>Hidratación del pelaje</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🦷</div>
+            <h3>Higiene dental</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Limpieza dental básica y cepillado para prevenir sarro, mal aliento y problemas mayores. Complemento ideal de la odontología veterinaria.</p>
+            <ul class="srv-list">
+              <li>Cepillado dental</li>
+              <li>Spray o gel dental</li>
+              <li>Recomendaciones de cuidado en casa</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">💅</div>
+            <h3>Corte de uñas</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Corte seguro de uñas con herramientas adecuadas para evitar lesiones, seguido de limado para un acabado suave.</p>
+            <ul class="srv-list">
+              <li>Corte seguro</li>
+              <li>Limado final</li>
+              <li>Revisión de almohadillas</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🌸</div>
+            <h3>Spa relajante</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Sesión de spa con masajes, aromaterapia suave y tratamientos especiales para consentir a tu mascota y reducir su estrés.</p>
+            <ul class="srv-list">
+              <li>Masaje relajante</li>
+              <li>Aromaterapia pet-safe</li>
+              <li>Tratamiento hidratante</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🧴</div>
+            <h3>Tratamientos dermatológicos</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Baños medicados y tratamientos específicos para pieles sensibles, con alergias o afecciones dermatológicas diagnosticadas.</p>
+            <ul class="srv-list">
+              <li>Baños medicados</li>
+              <li>Tratamiento antimicótico</li>
+              <li>Hidratación intensiva</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+        <article class="srv-card" data-service>
+          <div class="srv-header">
+            <div class="srv-icon">🎀</div>
+            <h3>Paquete completo</h3>
+            <span class="srv-toggle">+</span>
+          </div>
+          <div class="srv-body">
+            <p>Nuestro servicio estrella: baño, corte, cepillado, uñas, higiene dental y perfume. Todo lo que tu mascota necesita en una sola sesión.</p>
+            <ul class="srv-list">
+              <li>Baño + corte + cepillado</li>
+              <li>Uñas + oídos + dientes</li>
+              <li>Perfume y lazo decorativo</li>
+            </ul>
+            <a class="btn primary srv-cta" href="#reservar" data-view="reservar">Reservar este servicio →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-band-in">
+      <div>
+        <h3>Agenda una sesión de spa.</h3>
+        <p>Tu mascota merece un día de consentimiento y relajación.</p>
+      </div>
+      <a class="btn primary" href="#reservar" data-view="reservar">Reservar spa →</a>
+    </div>
+  </section>
+</section>
+
+
+<!-- ============================================================
+     VISTA RESERVAR
+============================================================ -->
+<section class="view" id="reservar">
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">RESERVA EN LÍNEA</span>
+      <h1>Agenda la cita de tu mascota.</h1>
+      <p>Completa el formulario y te contactaremos para confirmar la disponibilidad. También puedes escribirnos directamente por WhatsApp.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap booking-grid">
+      <div class="booking-intro">
+        <span class="eyebrow">CÓMO FUNCIONA</span>
+        <h2>Reservar es muy fácil.</h2>
+        <ol class="steps">
+          <li><b>1.</b> Completa el formulario con tus datos y los de tu mascota.</li>
+          <li><b>2.</b> Al enviarlo, se abrirá WhatsApp con el mensaje listo para enviar.</li>
+          <li><b>3.</b> Nuestro equipo te confirmará la disponibilidad y los detalles.</li>
+          <li><b>4.</b> ¡Listo! Te esperamos en la clínica con tu mascota.</li>
+        </ol>
+        <div class="booking-note">
+          <b>Atención 24/7</b>
+          <span>Para emergencias, puedes llamarnos directamente al <a href="tel:+573213673394">321 367 3394</a>.</span>
+        </div>
+      </div>
+
+      <form class="appointment-form" id="appointmentForm">
+        <div class="form-title">Solicitar una cita</div>
+        <div class="row">
+          <label>Nombre completo<input name="nombre" required placeholder="Tu nombre"></label>
+          <label>Teléfono<input name="telefono" required type="tel" placeholder="321 000 0000"></label>
+        </div>
+        <div class="row">
+          <label>Nombre de la mascota<input name="mascota" required placeholder="Ej. Luna"></label>
+          <label>Especie<select name="especie" required><option value="">Selecciona</option><option>Perro</option><option>Gato</option><option>Otro</option></select></label>
+        </div>
+        <div class="row">
+          <label>Fecha<input name="fecha" required type="date"></label>
+          <label>Hora<input name="hora" required type="time"></label>
+        </div>
+        <label>Servicio<select name="servicio" required>
+          <option value="">Selecciona un servicio</option>
+          <option>Consulta médica</option>
+          <option>Vacunación</option>
+          <option>Urgencia 24/7</option>
+          <option>Laboratorio</option>
+          <option>Radiografía / Ecografía</option>
+          <option>Cirugía</option>
+          <option>Odontología</option>
+          <option>Hospitalización</option>
+          <option>Spa / Estética</option>
+          <option>Pet Shop</option>
+        </select></label>
+        <label>Mensaje adicional<textarea name="mensaje" rows="3" placeholder="Cuéntanos brevemente qué necesita tu mascota..."></textarea></label>
+        <button type="submit" class="btn primary full">Enviar por WhatsApp →</button>
+      </form>
+    </div>
+  </section>
+</section>
+
+
+<!-- ============================================================
+     VISTA CONTACTO
+============================================================ -->
+<section class="view" id="contacto">
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">CONTACTO</span>
+      <h1>Estamos aquí para ti y tu mascota.</h1>
+      <p>Llámanos, escríbenos o visítanos. Atendemos 24 horas al día, 7 días a la semana.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <h2>Información de contacto</h2>
+        <div class="contact-item"><span>📞</span><div><b>Teléfono / WhatsApp</b><a href="tel:+573213673394">321 367 3394</a></div></div>
+        <div class="contact-item"><span>📍</span><div><b>Ubicación</b><p>Bogotá, Colombia</p></div></div>
+        <div class="contact-item"><span>🕐</span><div><b>Horario</b><p>Lunes a domingo · 24 horas</p></div></div>
+        <div class="contact-item"><span>📧</span><div><b>Correo</b><a href="mailto:contacto@huellitassos.com">contacto@huellitassos.com</a></div></div>
+
+        <div class="map-placeholder">
+          <span>🗺️</span>
+          <p>Aquí irá el mapa de Google Maps</p>
+        </div>
+      </div>
+
+      <div class="contact-side">
+        <div class="contact-cta">
+          <h3>¿Es una emergencia?</h3>
+          <p>Llámanos directamente, estamos disponibles 24/7 para atender a tu mascota.</p>
+          <a class="btn primary full" href="tel:+573213673394">📞 Llamar ahora</a>
+        </div>
+        <div class="contact-cta whatsapp">
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>Resolvemos tus dudas y agendamos tu cita de forma rápida.</p>
+          <a class="btn primary full" href="https://wa.me/447418357240" target="_blank" rel="noopener">💬 Abrir WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="logo-huellitas-sos.jpeg" alt="Huellitas SOS">
+      <p>Clínica veterinaria 24/7 en Bogotá. Cuidamos la salud y el bienestar de perros y gatos con amor y profesionalismo.</p>
+    </div>
+    <div>
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#inicio" data-view="inicio">Inicio</a></li>
+        <li><a href="#nosotros" data-view="nosotros">Nosotros</a></li>
+        <li><a href="#servicios" data-view="servicios">Servicios</a></li>
+        <li><a href="#contacto" data-view="contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios" data-view="servicios">Consulta médica</a></li>
+        <li><a href="#servicios" data-view="servicios">Urgencias 24/7</a></li>
+        <li><a href="#petshop" data-view="petshop">Pet Shop</a></li>
+        <li><a href="#spa" data-view="spa">Spa & Estética</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li>📞 <a href="tel:+573213673394">321 367 3394</a></li>
+        <li>📍 Bogotá, Colombia</li>
+        <li>🕐 24 horas · 7 días</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <span>© 2025 Huellitas SOS. Todos los derechos reservados.</span>
+      <span>Hecho con 💚 para las mascotas de Bogotá</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
