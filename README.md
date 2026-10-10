@@ -17,8 +17,9 @@ Huellitas SOS es una clínica veterinaria creada para brindar atención integral
 
 ## Lenguaje 
 
-[x] HTML 
-[x] CSS 
-[x] JAVASCRIPT 
+
+[x] HTML  :  es el lenguaje estándar utilizado para crear y estructurar el contenido de las páginas web
+[x] CSS : es un lenguaje de diseño gráfico que se utiliza para definir y crear el aspecto visual de los documentos escritos en HTML o XML
+[x] JAVASCRIPT :lenguaje de programación interpretado que se utiliza principalmente para dar dinamismo, lógica e interactividad a las páginas web.
 
 ![imagen perrito](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKIw3b0OpycyPzORoFuPgpMH5uSrw2FdBAWP94VRjbE0EwfJmtcAJGotaP&s=10)
