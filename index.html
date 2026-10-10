@@ -58,13 +58,136 @@
   "description": "Clínica veterinaria 24/7 en Bogotá especializada en perros y gatos. Urgencias, consulta, spa, petshop y diagnóstico integral."
 }
 </script>
+
+<!-- ===== ESTILOS DEL WIDGET VETLUZ ===== -->
+<style>
+  #vetluz-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  #vetluz-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #10b981;
+    color: white;
+    border: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  #vetluz-toggle:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.7);
+  }
+
+  #vetluz-toggle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  #vetluz-modal {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 380px;
+    height: 600px;
+    max-height: 80vh;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  #vetluz-modal.active {
+    display: flex;
+  }
+
+  .vetluz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #10b981;
+    color: white;
+    padding: 12px 16px;
+    font-weight: 600;
+  }
+
+  #vetluz-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  #vetluz-modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    flex-grow: 1;
+  }
+
+  @media (max-width: 480px) {
+    #vetluz-modal {
+      width: calc(100vw - 20px);
+      right: 10px;
+      bottom: 90px;
+    }
+    #vetluz-toggle {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+
+<!-- ===== SCRIPT DEL WIDGET VETLUZ ===== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('vetluz-toggle');
+    const modal = document.getElementById('vetluz-modal');
+    const closeBtn = document.getElementById('vetluz-close');
+
+    if (toggleBtn && modal) {
+      toggleBtn.addEventListener('click', () => {
+        modal.classList.toggle('active');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (modal.classList.contains('active') && 
+            !modal.contains(e.target) && 
+            !toggleBtn.contains(e.target)) {
+          modal.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
 </head>
 <body>
-<!-- Botón flotante de VetLuz -->
+
+<!-- ===== WIDGET VETLUZ (BOTÓN FLOTANTE) ===== -->
 <div id="vetluz-widget">
   <button id="vetluz-toggle" aria-label="Abrir asistente virtual VetLuz">
-    <img src="https://verba.ink/favicon.ico" alt="VetLuz" onerror="this.style.display='none'">
-    <span>🐾 Asistente VetLuz</span>
+    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=200&q=80" alt="Asistente VetLuz - Perrito">
   </button>
   
   <div id="vetluz-modal">
@@ -80,6 +203,7 @@
     </iframe>
   </div>
 </div>
+
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="wrap topbar-in">
@@ -876,7 +1000,7 @@
         <div class="contact-cta whatsapp">
           <h3>Escríbenos por WhatsApp</h3>
           <p>Resolvemos tus dudas y agendamos tu cita de forma rápida.</p>
-          <a class="btn primary full" href="https://wa.me/573213673394" target="_blank" rel="noopener">💬 Abrir WhatsApp</a>
+          <a class="btn primary full" href="https://wa.me/447418357240" target="_blank" rel="noopener">💬 Abrir WhatsApp</a>
         </div>
       </div>
     </div>
