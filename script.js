@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
        6. SISTEMA DE RECONOCIMIENTO / CATÁLOGO PET SHOP
     ============================================================ */
     // Base de datos de productos (Simulada)
-    var productos = [
+    var product = [
         { id: 1, nombre: "Arenero Cerrado Premium", categoria: "Gatos", precio: 85000, desc: "Arenero cerrado con filtro de carbón para evitar olores. Ideal para espacios pequeños.", img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&q=80", tags: ["arenero", "gatos", "higiene"], descuento: false },
         { id: 2, nombre: "Arena Sanitaria Aglomerante 10kg", categoria: "Gatos", precio: 32000, desc: "Arena de alta absorción con control de olores. Rinde hasta 1 mes.", img: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?w=400&q=80", tags: ["arena", "gatos", "higiene"], descuento: true },
         { id: 3, nombre: "Pala para Arena de Gato", categoria: "Gatos", precio: 12000, desc: "Pala ergonómica con rejilla para filtrar la arena limpia.", img: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&q=80", tags: ["pala", "gatos", "higiene"], descuento: false },
